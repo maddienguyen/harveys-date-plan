@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harvey's Chicken Date Plan — Sandwiches, FNAF, YouTube, WandaVision &amp; Subnautica Alarms!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body class="harveys-striped-bg">
+  <!-- Sticky Top Subnautica Alarm Reminder Banner -->
+  <div id="subnautica-top-banner" class="alarm-sticky-bar" role="region" aria-label="Subnautica alarm reminder">
+    <span class="alarm-bell-icon" aria-hidden="true">⏰</span>
+    <span>
+      SUBNAUTICA ALERT: Don't forget to set alarms to watch <strong>Subnautica gameplay</strong>!
+    </span>
+    <span id="top-banner-alarm-count" class="spice-pill">3 alarms armed</span>
+    <a href="#subnautica-alarms" class="alarm-banner-link">Set Alarms Now ↓</a>
+  </div>
+
+  <main class="page-shell">
+    <!-- 1. HERO CARD -->
+    <header class="hero-card cartoon-card">
+      <div class="peeking-chicken peeking-chicken--top-left" data-chicken="peekLeft" aria-hidden="true"></div>
+      <div class="peeking-chicken peeking-chicken--top-right" data-chicken="peekRight" aria-hidden="true"></div>
+
+      <div class="hero-layout">
+        <div>
+          <span class="section-kicker">HARVEY'S SPECIAL DATE EDITION • 100% COZY CHAOS</span>
+          <h1 class="hero-title">Harvey's Chicken &amp; Cozy Chaos Date Night!</h1>
+          <p class="hero-lead">
+            Making his Harvey's chicken sandwich a beautiful thing — followed by Maddie braving FNAF, YouTube rabbit holes, WandaVision &amp; unmissable Subnautica alarms!
+          </p>
+          <p class="speech-bubble">
+            Step right up to the Harvey's counter! Build his chicken combo, load the snacks, and set those Subnautica alarms!
+          </p>
+
+          <nav class="itinerary-pills" aria-label="Date plan sections">
+            <a href="#chicken-meal" class="pill-nav">🍔 1. Order His Chicken Meal</a>
+            <a href="#fnaf-card" class="pill-nav">🔦 2. Maddie Plays FNAF</a>
+            <a href="#youtube-card" class="pill-nav">📺 3. YouTube Binge</a>
+            <a href="#wandavision-card" class="pill-nav">✨ 4. WandaVision</a>
+            <a href="#subnautica-alarms" class="pill-nav">⏰ 5. Subnautica Alarms!</a>
+            <a href="#date-timeline" class="pill-nav">📋 6. Full Itinerary</a>
+          </nav>
+        </div>
+
+        <div class="hero-art-wrap">
+          <div id="hero-chicken-slot" aria-label="Cartoon chef chicken holding a Harvey's chicken sandwich"></div>
+        </div>
+      </div>
+
+      <div class="chicken-parade-strip" id="chicken-parade-strip" aria-label="Cartoon chicken cheer squad">
+        <!-- Populated by js/app.js using window.CHICKEN_ART -->
+      </div>
+    </header>
+
+    <!-- 2. ORDER HIM A HARVEY'S CHICKEN SANDWICH MEAL -->
+    <section id="chicken-meal" class="cartoon-card" aria-labelledby="chicken-meal-heading">
+      <div class="peeking-chicken peeking-chicken--top-right" data-chicken="peekRight" aria-hidden="true"></div>
+
+      <div class="section-header">
+        <div>
+          <span class="section-kicker">ACT I • HARVEY'S DRIVE-THRU COUNTER</span>
+          <h2 id="chicken-meal-heading">Order Him a Harvey's Chicken Sandwich Meal</h2>
+          <p class="section-subtitle">
+            Pick his dream Canadian Harvey's chicken sandwich, pile on the famous Harvey's toppings bar, and lock in his combo!
+          </p>
+          <p class="speech-bubble">
+            Click any real Harvey's chicken sandwich below, customize his toppings &amp; sides, and stamp the live order ticket!
+          </p>
+        </div>
+        <div id="meal-chicken-slot" class="chicken-slot" aria-hidden="true"></div>
+      </div>
+
+      <div class="section-header" style="margin-bottom: 0.75rem;">
+        <h3>Pick His Harvey's Chicken Sandwich</h3>
+        <span id="sandwich-count-note" class="spice-pill">Real Harvey's Canada Menu</span>
+      </div>
+
+      <div id="sandwich-grid" class="sandwich-grid" role="list">
+        <!-- Populated dynamically from window.HARVEYS_DATE_MENU.sandwiches -->
+      </div>
+
+      <!-- Interactive Meal & Toppings Builder + Live Order Ticket -->
+      <div id="meal-builder" class="meal-builder">
+        <div>
+          <div class="builder-group">
+            <div class="builder-label">
+              <span>🥬 Harvey's Signature Toppings Bar</span>
+            </div>
+            <div class="combo-options" style="margin-bottom: 0.65rem;" role="group" aria-label="Quick topping presets">
+              <button type="button" class="mini-btn" data-topping-preset="works">The Works</button>
+              <button type="button" class="mini-btn" data-topping-preset="spicy">Spicy Kick</button>
+              <button type="button" class="mini-btn" data-topping-preset="classic">Classic</button>
+              <button type="button" class="mini-btn" data-topping-preset="clear">Clear All</button>
+            </div>
+            <div id="toppings-grid" class="toppings-grid" role="group" aria-label="Harvey's toppings">
+              <!-- Populated dynamically from window.HARVEYS_DATE_MENU.toppings -->
+            </div>
+          </div>
+
+          <div class="builder-group">
+            <div class="builder-label">🍟 Choose His Side</div>
+            <div id="sides-options" class="combo-options" role="radiogroup" aria-label="Meal sides">
+              <!-- Populated dynamically from window.HARVEYS_DATE_MENU.sides -->
+            </div>
+          </div>
+
+          <div class="builder-group">
+            <div class="builder-label">🥤 Choose His Drink</div>
+            <div id="drinks-options" class="combo-options" role="radiogroup" aria-label="Meal drinks">
+              <!-- Populated dynamically from window.HARVEYS_DATE_MENU.drinks -->
+            </div>
+          </div>
+
+          <div class="builder-group">
+            <label for="meal-custom-note" class="builder-label">💌 Special Note for His Bag</label>
+            <input
+              id="meal-custom-note"
+              type="text"
+              class="cartoon-input"
+              maxlength="120"
+              placeholder="e.g. Extra pickles, extra sauce &amp; lots of love!"
+            >
+          </div>
+        </div>
+
+        <!-- Live Order Ticket -->
+        <aside id="order-ticket" class="order-ticket" aria-label="Live Harvey's order receipt" aria-live="polite">
+          <div>
+            <div class="order-ticket-header">
+              <span>HARVEY'S • DATE ORDER</span>
+              <span id="ticket-order-num">#CHKN-01</span>
+            </div>
+            <div id="ticket-body" class="order-ticket-lines" style="margin-top: 0.85rem;">
+              <!-- Populated dynamically by js/app.js -->
+            </div>
+          </div>
+
+          <div>
+            <span id="ticket-stamp" class="order-ticket-stamp" style="margin-bottom: 0.75rem;">CUSTOM BUILD</span>
+            <div class="alarm-actions-row" style="margin-top: 0.25rem;">
+              <button type="button" id="lock-order-btn" class="cartoon-btn cartoon-btn--gold">
+                🍔 Lock In His Meal!
+              </button>
+              <button type="button" id="copy-order-btn" class="cartoon-btn cartoon-btn--ghost">
+                📋 Copy Order
+              </button>
+            </div>
+            <p id="order-status-msg" class="sandwich-source-note" style="margin-top: 0.6rem; margin-bottom: 0;" aria-live="polite"></p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- 3. COZY ACTIVITIES GRID: FNAF + YOUTUBE + WANDAVISION -->
+    <section id="activities" class="activities-grid" aria-label="Cozy date activities">
+      <!-- 3A. FNAF & Horror Games -->
+      <article id="fnaf-card" class="cartoon-card activity-card card-fnaf" aria-labelledby="fnaf-heading">
+        <div>
+          <div class="activity-top">
+            <div>
+              <span class="activity-badge">ACT II • SPOOKY BACKSEAT</span>
+              <h2 id="fnaf-heading">Watch Maddie Play FNAF &amp; Horror Games</h2>
+            </div>
+            <div id="fnaf-chicken-slot" class="chicken-slot" aria-hidden="true"></div>
+          </div>
+
+          <p class="speech-bubble">
+            Blanket armor equipped! Cheer Maddie on, watch the security cams, and count every hilarious jumpscare.
+          </p>
+
+          <div class="fnaf-meter-box" style="margin-top: 0.9rem;">
+            <div class="sandwich-meta-row">
+              <strong>Jumpscare-O-Meter</strong>
+              <span id="jumpscare-count-badge" class="spice-pill">0 Jumpscares</span>
+            </div>
+            <div class="fnaf-meter-track" aria-hidden="true">
+              <div id="jumpscare-meter-fill" class="fnaf-meter-fill" style="width: 10%;"></div>
+            </div>
+            <p id="scare-reaction-text" style="font-size: 0.9rem; font-weight: 700; margin-bottom: 0.65rem;" aria-live="polite">
+              Power at 100% — Bonnie hasn't peeked yet...
+            </p>
+            <div class="alarm-actions-row" style="margin-top: 0;">
+              <button type="button" id="jumpscare-plus-btn" class="cartoon-btn cartoon-btn--danger">
+                👻 +1 Jumpscare!
+              </button>
+              <button type="button" id="jumpscare-reset-btn" class="cartoon-btn cartoon-btn--ghost">
+                Reset Night
+              </button>
+            </div>
+          </div>
+
+          <div class="toppings-grid" style="margin-top: 0.85rem;" role="group" aria-label="Co-pilot bravery mode">
+            <button type="button" class="topping-chip is-selected" data-fnaf-mode="Cozy Blanket Shield">🛋️ Blanket Shield</button>
+            <button type="button" class="topping-chip" data-fnaf-mode="Door Cam Spotter">📹 Cam Spotter</button>
+            <button type="button" class="topping-chip" data-fnaf-mode="No Flinch Challenge">⚡ No Flinch</button>
+          </div>
+        </div>
+
+        <div>
+          <h3 style="margin-top: 0.35rem;">Maddie's Horror Watchlist</h3>
+          <ul id="fnaf-watchlist" class="watchlist-items" style="margin-bottom: 0.65rem;">
+            <!-- Populated by js/app.js -->
+          </ul>
+          <form id="fnaf-add-form" class="youtube-input-row">
+            <label for="fnaf-game-input" class="sr-only">Add horror game</label>
+            <input id="fnaf-game-input" type="text" class="cartoon-input" maxlength="80" placeholder="Add horror game (e.g. Phasmophobia)...">
+            <button type="submit" class="cartoon-btn cartoon-btn--gold">+ Add</button>
+          </form>
+        </div>
+      </article>
+
+      <!-- 3B. Watch YouTube Videos -->
+      <article id="youtube-card" class="cartoon-card activity-card card-youtube" aria-labelledby="youtube-heading">
+        <div>
+          <div class="activity-top">
+            <div>
+              <span class="activity-badge">ACT III • SNACK &amp; STREAM</span>
+              <h2 id="youtube-heading">Watch YouTube Videos</h2>
+            </div>
+            <div id="youtube-chicken-slot" class="chicken-slot" aria-hidden="true"></div>
+          </div>
+
+          <p class="speech-bubble">
+            Post-horror comedy cooldown! Load up funny clips, food tier lists, and internet rabbit holes while eating fries.
+          </p>
+
+          <div id="youtube-now-playing" class="now-playing-pill" aria-live="polite" style="margin-top: 0.9rem;">
+            ▶ Up Next: Pick or spin a video below!
+          </div>
+
+          <ul id="youtube-list" class="youtube-queue-list" style="margin-top: 0.75rem;">
+            <!-- Populated by js/app.js -->
+          </ul>
+        </div>
+
+        <div>
+          <form id="youtube-add-form" class="youtube-input-row" style="margin-bottom: 0.7rem;">
+            <label for="youtube-video-input" class="sr-only">Add YouTube video title or URL</label>
+            <input id="youtube-video-input" type="text" class="cartoon-input" maxlength="100" placeholder="Add video title or YouTube link...">
+            <button type="submit" class="cartoon-btn cartoon-btn--danger">+ Queue</button>
+          </form>
+
+          <div class="sandwich-meta-row">
+            <button type="button" id="youtube-random-btn" class="cartoon-btn cartoon-btn--gold">
+              🎲 Random Pick
+            </button>
+            <span id="youtube-progress-note" class="spice-pill">0 / 4 watched</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3C. Watch WandaVision -->
+      <article id="wandavision-card" class="cartoon-card activity-card card-wandavision" aria-labelledby="wandavision-heading">
+        <div>
+          <div class="activity-top">
+            <div>
+              <span class="activity-badge">ACT IV • WESTVIEW BROADCAST</span>
+              <h2 id="wandavision-heading">Watch WandaVision</h2>
+            </div>
+            <div id="wandavision-chicken-slot" class="chicken-slot" aria-hidden="true"></div>
+          </div>
+
+          <div class="retro-tv-box" style="margin-top: 0.65rem;" aria-live="polite">
+            <div class="retro-tv-screen" id="wanda-tv-screen">
+              <span id="wanda-era-badge" class="spice-pill" style="margin-bottom: 0.45rem;">1950S SITCOM ERA</span>
+              <h3 id="wanda-tv-title" style="color: #ffffff; margin-bottom: 0.25rem;">Ep 1: Filmed Before a Live Studio Audience</h3>
+              <p id="wanda-tv-tagline" style="margin: 0; font-size: 0.9rem; font-weight: 700;">Black &amp; white kitchen chaos + mysterious Stark toaster!</p>
+            </div>
+            <div class="retro-tv-controls">
+              <button type="button" id="wanda-prev-btn" class="mini-btn">◀ Prev</button>
+              <button type="button" id="wanda-mark-btn" class="mini-btn">✓ Mark Watched</button>
+              <button type="button" id="wanda-next-btn" class="mini-btn">Next ▶</button>
+              <span class="retro-tv-dial" aria-hidden="true"></span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="sandwich-meta-row" style="margin-bottom: 0.55rem;">
+            <h3 style="margin: 0;">Episode Tracker</h3>
+            <span id="wanda-progress-badge" class="spice-pill">0 / 9 Watched</span>
+          </div>
+          <div id="wanda-episodes-grid" class="episode-pill-list" role="group" aria-label="WandaVision episodes">
+            <!-- Populated by js/app.js -->
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- 4. UNMISSABLE SUBNAUTICA ALARM SECTION -->
+    <section id="subnautica-alarms" class="cartoon-card alarm-card" aria-labelledby="subnautica-heading">
+      <div class="peeking-chicken peeking-chicken--bottom-right" data-chicken="peekRight" aria-hidden="true"></div>
+
+      <div class="section-header" style="margin-bottom: 0.9rem;">
+        <div>
+          <span class="section-kicker">⚠️ MANDATORY DATE REMINDER — DO NOT MISS!</span>
+          <h2 id="subnautica-heading">Set Alarms to Watch Subnautica Gameplay!</h2>
+          <p class="section-subtitle">
+            Deep sea Reaper Leviathans wait for nobody! Add backup alarms, test the cartoon dive bell chime, and export a real <code>.ics</code> calendar reminder!
+          </p>
+        </div>
+        <span id="alarm-countdown-badge" class="alarm-time-badge">3 Armed</span>
+      </div>
+
+      <div class="alarm-banner-strip">
+        <span><span class="alarm-bell-icon" aria-hidden="true">🚨</span> REMINDER TO SET ALARMS FOR WATCHING SUBNAUTICA GAMEPLAY!</span>
+        <span class="spice-pill">Zero Missed Dives Allowed</span>
+      </div>
+
+      <div class="alarm-layout">
+        <div>
+          <form id="alarm-add-form">
+            <div class="alarm-form-row">
+              <div>
+                <label for="alarm-time-input" class="sr-only">Alarm time</label>
+                <input id="alarm-time-input" type="time" class="cartoon-input" value="21:00" required>
+              </div>
+              <div>
+                <label for="alarm-label-input" class="sr-only">Alarm label</label>
+                <input id="alarm-label-input" type="text" class="cartoon-input" maxlength="80" placeholder="e.g. Subnautica Gameplay Kickoff!">
+              </div>
+              <button type="submit" class="cartoon-btn cartoon-btn--aqua">
+                ⏰ Add Alarm
+              </button>
+            </div>
+          </form>
+
+          <div class="alarm-actions-row" style="margin-top: 0; margin-bottom: 1rem;">
+            <button type="button" id="download-ics-btn" class="cartoon-btn cartoon-btn--gold">
+              📅 Download .ics Calendar Reminder
+            </button>
+            <button type="button" id="test-alarm-audio-btn" class="cartoon-btn cartoon-btn--danger">
+              🔔 Test Cartoon Alarm Chime!
+            </button>
+          </div>
+
+          <p id="alarm-feedback-msg" style="font-weight: 800; min-height: 1.4em; margin-bottom: 0.75rem;" aria-live="polite"></p>
+
+          <h3>Subnautica Alarm Checklist</h3>
+          <ul id="alarm-list" class="alarm-checklist">
+            <!-- Populated by js/app.js -->
+          </ul>
+        </div>
+
+        <div>
+          <div id="subnautica-chicken-slot" aria-hidden="true"></div>
+          <h3 style="margin-top: 1rem;">Pre-Dive Readiness</h3>
+          <ul id="subnautica-prep-list" class="watchlist-items">
+            <!-- Populated by js/app.js -->
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. FULL DATE PLAN TIMELINE -->
+    <section id="date-timeline" class="cartoon-card" aria-labelledby="timeline-heading">
+      <div class="section-header">
+        <div>
+          <span class="section-kicker">THE MASTER PLAN • START TO FINISH</span>
+          <h2 id="timeline-heading">Full Date Itinerary Checklist</h2>
+          <p class="section-subtitle">
+            Check off each quest as we crush the ultimate Harvey's chicken &amp; gaming date night!
+          </p>
+        </div>
+        <span id="timeline-progress-text" class="spice-pill">0 / 5 Quests Done</span>
+      </div>
+
+      <ol id="timeline-steps" class="timeline-steps">
+        <!-- Populated by js/app.js -->
+      </ol>
+    </section>
+  </main>
+
+  <!-- 6. FOOTER -->
+  <footer class="page-shell" style="margin-top: 0;">
+    <div class="cartoon-footer">
+      <div id="footer-chickens" aria-hidden="true">
+        <!-- Populated with cartoon chickens by js/app.js -->
+      </div>
+      <h2>Made with Extra Pickles, Crispy Chicken &amp; Cozy Date Vibes</h2>
+      <p id="footer-pun-text" style="font-weight: 700; max-width: 60ch; margin: 0;">
+        Cluck around and find out: Harvey's + FNAF + YouTube + WandaVision + Subnautica = 10/10 night!
+      </p>
+      <div class="alarm-actions-row" style="justify-content: center; margin-top: 0.25rem;">
+        <button type="button" id="cluck-confetti-btn" class="cartoon-btn cartoon-btn--gold">
+          🐔 Cluck &amp; Confetti!
+        </button>
+        <button type="button" id="reset-all-btn" class="cartoon-btn cartoon-btn--ghost">
+          Reset Date Progress
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Plain scripts loaded in strict order so file:// works with zero CORS errors -->
+  <script src="js/sandwiches-data.js"></script>
+  <script src="js/chickens.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

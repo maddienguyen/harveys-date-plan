@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 280" width="320" height="280" role="img" aria-label="Cartoon chicken wearing Subnautica diving goggles and snorkel ringing twin-bell alarm clocks">
+  <!-- Aqua splash & underwater bubbles -->
+  <ellipse cx="160" cy="256" rx="108" ry="12" fill="#22b8cf" fill-opacity="0.22" />
+  <path d="M90 250 C114 238, 140 246, 160 244 C180 242, 206 238, 232 250" fill="none" stroke="#22b8cf" stroke-width="4" stroke-linecap="round" />
+  <circle cx="96" cy="54" r="9" fill="#a5f3fc" stroke="#1b1108" stroke-width="2.5" />
+  <circle cx="93" cy="51" r="2.5" fill="#ffffff" />
+  <circle cx="228" cy="48" r="11" fill="#a5f3fc" stroke="#1b1108" stroke-width="2.5" />
+  <circle cx="224" cy="44" r="3" fill="#ffffff" />
+  <circle cx="204" cy="28" r="6" fill="#a5f3fc" stroke="#1b1108" stroke-width="2.5" />
+  <circle cx="114" cy="30" r="5" fill="#a5f3fc" stroke="#1b1108" stroke-width="2.5" />
+
+  <!-- Alarm vibration comic wave arcs -->
+  <path d="M24 88 C14 102, 14 126, 24 140" fill="none" stroke="#ff3b30" stroke-width="4" stroke-linecap="round" />
+  <path d="M14 96 C6 108, 6 120, 14 132" fill="none" stroke="#ffd43b" stroke-width="3.5" stroke-linecap="round" />
+  <path d="M294 78 C306 94, 306 118, 294 134" fill="none" stroke="#ff3b30" stroke-width="4" stroke-linecap="round" />
+  <path d="M304 88 C312 100, 312 114, 304 126" fill="none" stroke="#ffd43b" stroke-width="3.5" stroke-linecap="round" />
+
+  <!-- Snorkel curving up on right side of head -->
+  <path d="M182 116 L206 116 C216 116, 220 108, 220 96 L220 56" fill="none" stroke="#1b1108" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M182 116 L206 116 C216 116, 220 108, 220 96 L220 56" fill="none" stroke="#ff7b00" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round" />
+  <rect x="213" y="48" width="14" height="12" rx="4" fill="#ffd43b" stroke="#1b1108" stroke-width="3" />
+  <circle cx="220" cy="36" r="4" fill="#a5f3fc" stroke="#1b1108" stroke-width="2" />
+
+  <!-- Bouncing legs -->
+  <path d="M138 212 L130 236 L114 238 C108 238, 108 245, 114 245 L126 245 L124 251 C122 256, 129 258, 132 253 L136 245 L146 247 C152 248, 154 241, 148 239 L140 237 L148 214 Z" fill="#ffa94d" stroke="#1b1108" stroke-width="3.5" stroke-linejoin="round" />
+  <path d="M174 212 L182 236 L170 239 C164 241, 166 248, 172 247 L182 245 L184 253 C186 258, 193 256, 192 251 L190 245 L204 245 C210 245, 210 238, 204 238 L190 236 L184 212 Z" fill="#ffa94d" stroke="#1b1108" stroke-width="3.5" stroke-linejoin="round" />
+
+  <!-- Plump Body -->
+  <path d="M120 130 C102 158, 104 202, 130 218 C148 228, 176 228, 194 216 C216 198, 216 156, 198 130 Z" fill="#fff9ef" stroke="#1b1108" stroke-width="4" stroke-linejoin="round" />
+  <path d="M188 138 C206 160, 206 194, 188 214 C176 222, 158 224, 146 220 C172 218, 192 200, 192 172 C192 156, 190 146, 188 138 Z" fill="#f3d9b1" />
+
+  <!-- Head -->
+  <path d="M118 96 C108 92, 106 102, 116 106 C116 126, 136 140, 160 140 C186 140, 204 124, 202 104 C210 100, 208 90, 200 90 C198 62, 180 46, 158 46 C134 46, 116 68, 118 96 Z" fill="#fff9ef" stroke="#1b1108" stroke-width="4" stroke-linejoin="round" />
+
+  <!-- Bright Red Comb above goggle strap -->
+  <path d="M138 50 C130 34, 144 22, 156 34 C162 20, 178 24, 176 40 C186 34, 192 46, 182 54 Z" fill="#ff3b30" stroke="#1b1108" stroke-width="3.5" stroke-linejoin="round" />
+
+  <!-- Goggle strap around head -->
+  <path d="M116 82 L202 82 L202 92 L116 92 Z" fill="#1e293b" stroke="#1b1108" stroke-width="3" />
+
+  <!-- Subnautica-style Diving Goggles -->
+  <path d="M116 74 C116 66, 126 62, 160 62 C194 62, 204 66, 204 74 L204 94 C204 104, 188 108, 174 106 C166 104, 164 98, 160 98 C156 98, 154 104, 146 106 C132 108, 116 104, 116 94 Z" fill="#1e293b" stroke="#1b1108" stroke-width="4" stroke-linejoin="round" />
+  <path d="M124 75 C124 70, 134 68, 160 68 C186 68, 196 70, 196 75 L196 92 C196 98, 184 100, 174 98 C166 96, 164 90, 160 90 C156 90, 154 96, 146 98 C136 100, 124 98, 124 92 Z" fill="#22d3ee" stroke="#1b1108" stroke-width="3" stroke-linejoin="round" />
+  <!-- Wide-awake eyes inside glowing cyan goggles -->
+  <circle cx="143" cy="83" r="9.5" fill="#ffffff" stroke="#1b1108" stroke-width="2.5" />
+  <circle cx="177" cy="83" r="9.5" fill="#ffffff" stroke="#1b1108" stroke-width="2.5" />
+  <circle cx="144" cy="83" r="4.8" fill="#1b1108" />
+  <circle cx="176" cy="83" r="4.8" fill="#1b1108" />
+  <circle cx="146" cy="81" r="1.8" fill="#ffffff" />
+  <circle cx="178" cy="81" r="1.8" fill="#ffffff" />
+  <!-- Diagonal aqua visor glare -->
+  <path d="M128 92 L144 70 M164 94 L182 70" fill="none" stroke="#a5f3fc" stroke-width="4" stroke-linecap="round" opacity="0.7" />
+
+  <!-- Wattle & cheerful determined beak -->
+  <path d="M150 122 C146 132, 152 138, 158 136 C164 134, 164 126, 160 120" fill="#ff3b30" stroke="#1b1108" stroke-width="3" />
+  <path d="M142 108 C154 102, 170 104, 184 114 C172 124, 152 124, 142 114 Z" fill="#fcc419" stroke="#1b1108" stroke-width="3.5" stroke-linejoin="round" />
+  <path d="M148 114 C158 117, 170 116, 180 114" fill="none" stroke="#1b1108" stroke-width="2.5" stroke-linecap="round" />
+
+  <!-- Left Wing ringing Twin-Bell Alarm Clock #1 -->
+  <path d="M120 156 C100 154, 86 146, 78 134" fill="none" stroke="#1b1108" stroke-width="14" stroke-linecap="round" />
+  <path d="M120 156 C100 154, 86 146, 78 134" fill="none" stroke="#fff9ef" stroke-width="7.5" stroke-linecap="round" />
+  <g transform="rotate(-18 60 112)">
+    <!-- Clock feet & striker -->
+    <line x1="46" y1="138" x2="40" y2="148" stroke="#1b1108" stroke-width="4" stroke-linecap="round" />
+    <line x1="74" y1="138" x2="80" y2="148" stroke="#1b1108" stroke-width="4" stroke-linecap="round" />
+    <line x1="60" y1="84" x2="60" y2="74" stroke="#1b1108" stroke-width="3.5" stroke-linecap="round" />
+    <circle cx="60" cy="73" r="4" fill="#ffd43b" stroke="#1b1108" stroke-width="2.5" />
+    <!-- Twin bells -->
+    <path d="M32 94 C28 80, 42 74, 52 84 Z" fill="#ffd43b" stroke="#1b1108" stroke-width="3.5" stroke-linejoin="round" />
+    <path d="M88 94 C92 80, 78 74, 68 84 Z" fill="#ffd43b" stroke="#1b1108" stroke-width="3.5" stroke-linejoin="round" />
+    <!-- Clock body & face -->
+    <circle cx="60" cy="114" r="28" fill="#ff3b30" stroke="#1b1108" stroke-width="4" />
+    <circle cx="60" cy="114" r="21" fill="#fff9ef" stroke="#1b1108" stroke-width="3" />
+    <line x1="60" y1="114" x2="60" y2="98" stroke="#1b1108" stroke-width="3.5" stroke-linecap="round" />
+    <line x1="60" y1="114" x2="72" y2="118" stroke="#ff3b30" stroke-width="3.5" stroke-linecap="round" />
+    <circle cx="60" cy="114" r="3" fill="#1b1108" />
+  </g>
+
+  <!-- Right Wing ringing Twin-Bell Alarm Clock #2 -->
+  <path d="M200 154 C220 148, 234 140, 242 126" fill="none" stroke="#1b1108" stroke-width="14" stroke-linecap="round" />
+  <path d="M200 154 C220 148, 234 140, 242 126" fill="none" stroke="#fff9ef" stroke-width="7.5" stroke-linecap="round" />
+  <g transform="rotate(16 260 106)">
+    <line x1="246" y1="132" x2="240" y2="142" stroke="#1b1108" stroke-width="4" stroke-linecap="round" />
+    <line x1="274" y1="132" x2="280" y2="142" stroke="#1b1108" stroke-width="4" stroke-linecap="round" />
+    <line x1="260" y1="78" x2="260" y2="68" stroke="#1b1108" stroke-width="3.5" stroke-linecap="round" />
+    <circle cx="260" cy="67" r="4" fill="#ff3b30" stroke="#1b1108" stroke-width="2.5" />
+    <path d="M232 88 C228 74, 242 68, 252 78 Z" fill="#ffd43b" stroke="#1b1108" stroke-width="3.5" stroke-linejoin="round" />
+    <path d="M288 88 C292 74, 278 68, 268 78 Z" fill="#ffd43b" stroke="#1b1108" stroke-width="3.5" stroke-linejoin="round" />
+    <circle cx="260" cy="108" r="28" fill="#ff7b00" stroke="#1b1108" stroke-width="4" />
+    <circle cx="260" cy="108" r="21" fill="#fff9ef" stroke="#1b1108" stroke-width="3" />
+    <line x1="260" y1="108" x2="250" y2="96" stroke="#1b1108" stroke-width="3.5" stroke-linecap="round" />
+    <line x1="260" y1="108" x2="274" y2="108" stroke="#e85d04" stroke-width="3.5" stroke-linecap="round" />
+    <circle cx="260" cy="108" r="3" fill="#1b1108" />
+  </g>
+</svg>

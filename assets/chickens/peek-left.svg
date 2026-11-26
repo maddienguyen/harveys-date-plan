@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" width="180" height="180" role="img" aria-label="Cute cartoon chicken peeking in from the left">
+  <!-- Playful curiosity motion lines -->
+  <path d="M138 42 L152 32 M146 60 L162 58 M142 78 L156 84" fill="none" stroke="#ff7b00" stroke-width="3.5" stroke-linecap="round" />
+
+  <!-- Rounded peeking body & head emerging from left -->
+  <path d="M22 48 C14 70, 14 134, 24 154 C46 164, 86 162, 102 142 C116 126, 122 104, 120 82 C118 52, 96 34, 68 34 C44 34, 28 40, 22 48 Z" fill="#fff9ef" stroke="#1b1108" stroke-width="4" stroke-linejoin="round" />
+  <path d="M84 148 C100 136, 114 114, 114 86 C114 66, 102 48, 86 40 C106 46, 118 66, 118 90 C118 118, 102 142, 84 148 Z" fill="#f3d9b1" />
+
+  <!-- Bright red comb -->
+  <path d="M44 40 C38 22, 54 14, 66 26 C72 14, 88 18, 86 34 C96 28, 104 38, 94 44 Z" fill="#ff3b30" stroke="#1b1108" stroke-width="3.5" stroke-linejoin="round" />
+
+  <!-- Curious wide comic eyes peering right -->
+  <ellipse cx="76" cy="76" rx="10.5" ry="12.5" fill="#ffffff" stroke="#1b1108" stroke-width="3" />
+  <ellipse cx="103" cy="75" rx="9.5" ry="11.5" fill="#ffffff" stroke="#1b1108" stroke-width="3" />
+  <circle cx="80" cy="76" r="5" fill="#1b1108" />
+  <circle cx="107" cy="75" r="4.8" fill="#1b1108" />
+  <circle cx="82" cy="73" r="2" fill="#ffffff" />
+  <circle cx="109" cy="72" r="2" fill="#ffffff" />
+  <path d="M66 59 C72 54, 80 54, 84 58" fill="none" stroke="#1b1108" stroke-width="3" stroke-linecap="round" />
+  <path d="M96 58 C102 53, 110 54, 114 58" fill="none" stroke="#1b1108" stroke-width="3" stroke-linecap="round" />
+
+  <!-- Rosy cheek & wattle -->
+  <ellipse cx="56" cy="94" rx="7" ry="4.5" fill="#ff8787" opacity="0.7" />
+  <path d="M84 104 C80 116, 86 124, 93 122 C99 120, 100 110, 96 104" fill="#ff3b30" stroke="#1b1108" stroke-width="3" stroke-linejoin="round" />
+
+  <!-- Cheeky smiling beak pointing right -->
+  <path d="M96 86 C114 82, 134 88, 140 96 C132 103, 112 106, 96 98 Z" fill="#fcc419" stroke="#1b1108" stroke-width="3.5" stroke-linejoin="round" />
+  <path d="M98 98 C110 108, 126 108, 134 99" fill="#f59f00" stroke="#1b1108" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Cute peeking wing gripping left edge -->
+  <path d="M40 114 C28 112, 18 118, 16 128 C14 136, 22 142, 32 138 C32 146, 44 148, 50 138 C56 144, 66 138, 62 128 C58 118, 48 116, 40 114 Z" fill="#fff9ef" stroke="#1b1108" stroke-width="3.5" stroke-linejoin="round" />
+</svg>

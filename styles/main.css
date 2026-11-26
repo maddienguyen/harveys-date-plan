@@ -1,0 +1,1780 @@
+/* ==========================================================================
+   Harvey's Chicken & Date Night Plan — Saturday-Morning Cartoon Stylesheet
+   Owner: @cartoon-stylist
+   ========================================================================== */
+
+:root {
+  /* Harvey's Signature Oranges & Warm Cream Surfaces */
+  --orange-light: #ffb668;
+  --orange-mid: #ffa94d;
+  --orange-dark: #e85d04;
+  --orange-deep: #d9480f;
+  --harveys-gold: #ffd43b;
+  --harveys-amber: #fcc419;
+
+  /* Surfaces & Ink */
+  --cream-bg: #fff9ef;
+  --cream-alt: #fff3dc;
+  --paper-white: #ffffff;
+  --ink: #1b1108;
+  --ink-soft: #4a3525;
+
+  /* Section & Theme Accents */
+  --fnaf-purple: #5b21b6;
+  --fnaf-purple-light: #ede9fe;
+  --fnaf-amber: #f59e0b;
+
+  --yt-red: #e62117;
+  --yt-red-soft: #ffe8e6;
+
+  --wv-crimson: #c9184a;
+  --wv-teal: #0f766e;
+  --wv-teal-bright: #14b8a6;
+  --wv-cream: #fdf2f8;
+
+  --sub-aqua: #06b6d4;
+  --sub-teal: #0e7490;
+  --sub-foam: #ecfeff;
+  --alarm-red: #ef4444;
+  --alarm-yellow: #fde047;
+
+  /* Comic Borders & Shadows */
+  --border-ink: 4px solid var(--ink);
+  --border-thin: 3px solid var(--ink);
+  --shadow-card: 8px 8px 0 var(--ink);
+  --shadow-card-hover: 11px 11px 0 var(--ink);
+  --shadow-sm: 4px 4px 0 var(--ink);
+  --shadow-btn: 0 5px 0 var(--ink);
+
+  /* Radii & Typography */
+  --radius-card: 24px;
+  --radius-md: 16px;
+  --radius-pill: 999px;
+  --font-display: 'Bungee', 'Fredoka', 'Arial Black', Impact, sans-serif;
+  --font-heading: 'Fredoka', 'Nunito', 'Comic Sans MS', system-ui, sans-serif;
+  --font-body: 'Nunito', 'Fredoka', system-ui, -apple-system, sans-serif;
+}
+
+/* Base Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+}
+
+/* ==========================================================================
+   MANDATORY BACKGROUND: Light Orange & Dark Orange Vertical Thick Stripes
+   ========================================================================== */
+body.harveys-striped-bg {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: clip;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink);
+  background-color: var(--orange-light);
+  background-image: repeating-linear-gradient(
+    90deg,
+    #ffb668 0px,
+    #ffb668 68px,
+    #e85d04 68px,
+    #e85d04 136px
+  );
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+code {
+  padding: 0.08rem 0.4rem;
+  background: rgba(255, 255, 255, 0.85);
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  font-weight: 800;
+  font-size: 0.9em;
+}
+
+:focus-visible {
+  outline: 4px solid var(--harveys-gold);
+  outline-offset: 3px;
+}
+
+/* Typography Helpers */
+h1,
+h2,
+h3,
+h4 {
+  margin: 0 0 0.55rem;
+  font-family: var(--font-heading);
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.8vw, 2.05rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-size: clamp(1.1rem, 2vw, 1.38rem);
+  font-weight: 700;
+}
+
+p {
+  margin: 0 0 0.75rem;
+}
+
+/* ==========================================================================
+   Sticky Top Subnautica Alarm Banner
+   ========================================================================== */
+.alarm-sticky-bar {
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.65rem 1rem;
+  padding: 0.65rem 1.25rem;
+  background: linear-gradient(90deg, var(--sub-teal) 0%, var(--sub-aqua) 50%, var(--sub-teal) 100%);
+  color: #ffffff;
+  border-bottom: var(--border-ink);
+  box-shadow: 0 4px 0 var(--ink);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  text-align: center;
+}
+
+.alarm-sticky-bar a,
+.alarm-sticky-bar .alarm-banner-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.95rem;
+  background: var(--alarm-yellow);
+  color: var(--ink);
+  border: var(--border-thin);
+  border-radius: var(--radius-pill);
+  box-shadow: 3px 3px 0 var(--ink);
+  text-decoration: none;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.92rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.alarm-sticky-bar a:hover,
+.alarm-sticky-bar .alarm-banner-link:hover {
+  transform: translate(-1px, -2px);
+  box-shadow: 5px 5px 0 var(--ink);
+  background: #ffffff;
+}
+
+.alarm-sticky-bar .alarm-bell-icon,
+.alarm-bell-icon {
+  display: inline-block;
+  transform-origin: top center;
+  animation: alarm-bell-shake 2.2s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   Page Shell & Core Cartoon Cards
+   ========================================================================== */
+.page-shell {
+  position: relative;
+  width: min(1160px, calc(100% - 2rem));
+  margin: 4rem auto 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3.75rem;
+}
+
+.cartoon-card {
+  position: relative;
+  background-color: var(--cream-bg);
+  border: var(--border-ink);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: clamp(1.35rem, 3vw, 2.25rem);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+  scroll-margin-top: 4.5rem;
+}
+
+.section-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.35rem;
+}
+
+.section-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.28rem 0.85rem;
+  margin-bottom: 0.55rem;
+  background: var(--harveys-gold);
+  color: var(--ink);
+  border: var(--border-thin);
+  border-radius: var(--radius-pill);
+  box-shadow: 3px 3px 0 var(--ink);
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.section-subtitle {
+  color: var(--ink-soft);
+  font-size: 1.03rem;
+  font-weight: 700;
+  max-width: 65ch;
+}
+
+/* ==========================================================================
+   Hero Card, Title, Itinerary Pills & Chicken Parade
+   ========================================================================== */
+.hero-card {
+  background: linear-gradient(155deg, var(--cream-bg) 0%, #fff1d6 100%);
+  overflow: visible;
+  animation: card-pop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.hero-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(220px, 0.85fr);
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.95rem, 4.6vw, 3.25rem);
+  line-height: 1.06;
+  color: var(--orange-deep);
+  text-shadow:
+    3px 3px 0 var(--ink),
+    -1.5px -1.5px 0 var(--ink),
+    1.5px -1.5px 0 var(--ink),
+    -1.5px 1.5px 0 var(--ink);
+  letter-spacing: 0.02em;
+  margin-bottom: 0.75rem;
+}
+
+.hero-lead {
+  font-size: clamp(1.02rem, 1.8vw, 1.18rem);
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 1.15rem;
+}
+
+.itinerary-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin: 1rem 0 0.5rem;
+}
+
+.pill-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.52rem 1rem;
+  background: var(--paper-white);
+  color: var(--ink);
+  border: var(--border-thin);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.93rem;
+  cursor: pointer;
+  transition: transform 0.16s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.16s ease,
+    background-color 0.16s ease;
+}
+
+.pill-nav:hover {
+  transform: translate(-2px, -4px) rotate(-1deg);
+  box-shadow: 6px 6px 0 var(--ink);
+  background: var(--harveys-gold);
+}
+
+.pill-nav:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.hero-art-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+#hero-chicken-slot {
+  width: min(310px, 100%);
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  background: radial-gradient(circle at center, #ffe8bf 0%, rgba(255, 232, 191, 0) 72%);
+  animation: chicken-wobble 4.2s ease-in-out infinite;
+}
+
+#hero-chicken-slot svg {
+  width: 100%;
+  height: auto;
+  max-height: 260px;
+  filter: drop-shadow(5px 5px 0 rgba(27, 17, 8, 0.22));
+}
+
+.chicken-parade-strip {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 1.35rem;
+  padding: 0.9rem 1.1rem;
+  background: var(--orange-light);
+  border: var(--border-thin);
+  border-radius: var(--radius-md);
+  box-shadow: inset 0 3px 0 rgba(255, 255, 255, 0.45), var(--shadow-sm);
+}
+
+.chicken-parade-strip .chicken-sticker:nth-child(odd) {
+  animation: chicken-wobble 3.4s ease-in-out infinite;
+}
+
+.chicken-parade-strip .chicken-sticker:nth-child(even) {
+  animation: chicken-wobble 3.8s ease-in-out infinite reverse;
+}
+
+/* ==========================================================================
+   Cartoon Chicken Stickers, Peeking Chickens & Speech Bubbles
+   ========================================================================== */
+.chicken-sticker {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.55rem 0.8rem;
+  background: var(--paper-white);
+  border: var(--border-thin);
+  border-radius: 18px;
+  box-shadow: 4px 4px 0 var(--ink);
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-align: center;
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.18s ease;
+}
+
+.chicken-sticker:hover {
+  transform: scale(1.06) rotate(-2deg);
+  background: #fff9db;
+}
+
+.chicken-sticker__art {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.chicken-sticker svg {
+  width: 60px;
+  height: 60px;
+  max-height: 60px;
+  flex-shrink: 0;
+}
+
+.chicken-sticker__label.speech-bubble {
+  padding: 0.22rem 0.65rem;
+  border-width: 2.5px;
+  border-radius: var(--radius-pill);
+  box-shadow: 2px 2px 0 var(--ink);
+  font-size: 0.78rem;
+  line-height: 1.2;
+  background: var(--harveys-gold);
+}
+
+.chicken-sticker__label.speech-bubble::after {
+  display: none;
+}
+
+.peeking-chicken {
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  pointer-events: none;
+  z-index: 5;
+  animation: chicken-wobble 4.5s ease-in-out infinite;
+}
+
+.peeking-chicken svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(3px 3px 0 var(--ink));
+}
+
+.peeking-chicken--top-right {
+  top: -46px;
+  right: 26px;
+}
+
+.peeking-chicken--top-left {
+  top: -46px;
+  left: 26px;
+}
+
+.peeking-chicken--bottom-right {
+  bottom: -44px;
+  right: 26px;
+}
+
+.speech-bubble {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  padding: 0.75rem 1.1rem;
+  background: var(--paper-white);
+  color: var(--ink);
+  border: var(--border-thin);
+  border-radius: 18px;
+  box-shadow: var(--shadow-sm);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -11px;
+  left: 28px;
+  width: 16px;
+  height: 16px;
+  background: var(--paper-white);
+  border-right: var(--border-thin);
+  border-bottom: var(--border-thin);
+  transform: rotate(45deg);
+}
+
+.speech-bubble--top::after {
+  bottom: auto;
+  top: -11px;
+  border-right: none;
+  border-bottom: none;
+  border-left: var(--border-thin);
+  border-top: var(--border-thin);
+}
+
+/* Generic Chicken Art Slots */
+.chicken-slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 112px;
+  height: 112px;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.86);
+  border: var(--border-thin);
+  border-radius: 20px;
+  box-shadow: var(--shadow-sm);
+  padding: 0.35rem;
+  animation: chicken-wobble 4s ease-in-out infinite;
+}
+
+.chicken-slot svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ==========================================================================
+   Buttons & Comic Controls
+   ========================================================================== */
+.cartoon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.65rem 1.2rem;
+  min-height: 44px;
+  background: var(--orange-dark);
+  color: #ffffff;
+  border: var(--border-thin);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-btn);
+  font-family: var(--font-heading);
+  font-size: 0.96rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.14s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.14s ease,
+    background-color 0.14s ease;
+}
+
+.cartoon-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 0 var(--ink);
+  background: var(--orange-deep);
+}
+
+.cartoon-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 var(--ink);
+}
+
+.cartoon-btn--gold {
+  background: var(--harveys-gold);
+  color: var(--ink);
+}
+
+.cartoon-btn--gold:hover {
+  background: #ffe066;
+}
+
+.cartoon-btn--aqua {
+  background: var(--sub-aqua);
+  color: var(--ink);
+}
+
+.cartoon-btn--aqua:hover {
+  background: #22d3ee;
+}
+
+.cartoon-btn--danger {
+  background: var(--alarm-red);
+  color: #ffffff;
+}
+
+.cartoon-btn--danger:hover {
+  background: #dc2626;
+}
+
+.cartoon-btn--ghost {
+  background: var(--paper-white);
+  color: var(--ink);
+}
+
+.cartoon-btn--ghost:hover {
+  background: var(--cream-alt);
+}
+
+.cartoon-input {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.55rem 0.9rem;
+  background: var(--paper-white);
+  color: var(--ink);
+  border: var(--border-thin);
+  border-radius: 14px;
+  box-shadow: 3px 3px 0 rgba(27, 17, 8, 0.2);
+  font-size: 0.96rem;
+  font-weight: 700;
+}
+
+.cartoon-input:focus {
+  outline: none;
+  border-color: var(--orange-deep);
+  box-shadow: 0 0 0 3px var(--harveys-gold);
+}
+
+/* Borderless row toggle button inside checklist/queue/alarm items */
+.checklist-toggle-btn {
+  flex: 1 1 160px;
+  min-width: 0;
+  padding: 0.15rem 0.25rem;
+  background: transparent;
+  border: 0;
+  text-align: left;
+  font: inherit;
+  font-weight: 700;
+  color: inherit;
+  cursor: pointer;
+  word-break: break-word;
+  line-height: 1.35;
+}
+
+.checklist-toggle-btn:hover {
+  color: var(--orange-deep);
+}
+
+/* ==========================================================================
+   Section 2: Harvey's Chicken Sandwich Grid & Meal Builder
+   ========================================================================== */
+.sandwich-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+  gap: 1.35rem;
+  margin-bottom: 2rem;
+}
+
+.sandwich-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: var(--paper-white);
+  border: var(--border-ink);
+  border-radius: 20px;
+  box-shadow: 6px 6px 0 var(--ink);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.sandwich-card:hover {
+  transform: translate(-3px, -5px);
+  box-shadow: 10px 10px 0 var(--ink);
+}
+
+.sandwich-card.is-selected,
+.sandwich-card.selected {
+  background: #fff4d6;
+  box-shadow: 0 0 0 4px var(--orange-dark), 10px 10px 0 var(--ink);
+}
+
+.sandwich-photo-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: var(--border-thin);
+  border-radius: 14px;
+  background: linear-gradient(135deg, #ffe5b4 0%, #ffd289 100%);
+}
+
+img.sandwich-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.28s ease;
+}
+
+.sandwich-card:hover img.sandwich-photo {
+  transform: scale(1.04);
+}
+
+.sandwich-badge {
+  position: absolute;
+  top: 0.55rem;
+  left: 0.55rem;
+  z-index: 2;
+  display: inline-block;
+  padding: 0.25rem 0.7rem;
+  background: var(--harveys-gold);
+  color: var(--ink);
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius-pill);
+  box-shadow: 2px 2px 0 var(--ink);
+  font-family: var(--font-heading);
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.sandwich-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.spice-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.22rem 0.65rem;
+  background: #ffe8cc;
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.spice-pill[data-spice='hot'],
+.spice-pill--hot,
+.spice-pill--spicy {
+  background: #ffc9c9;
+  color: #7f1d1d;
+}
+
+.spice-pill--medium {
+  background: #ffd8a8;
+  color: #7c2d12;
+}
+
+.spice-pill--mild {
+  background: #d3f9d8;
+  color: #14532d;
+}
+
+.sandwich-tagline {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--orange-deep);
+  font-size: 0.94rem;
+  margin-bottom: 0.25rem;
+}
+
+.sandwich-description {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  margin-bottom: 0.5rem;
+}
+
+.sandwich-source-note {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  opacity: 0.92;
+}
+
+.sandwich-fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+  padding: 0.85rem;
+  gap: 0.45rem;
+  background: repeating-linear-gradient(
+    -45deg,
+    #fff3dc,
+    #fff3dc 12px,
+    #ffe4b5 12px,
+    #ffe4b5 24px
+  );
+  font-family: var(--font-heading);
+  font-size: 0.86rem;
+}
+
+/* Meal Builder */
+.meal-builder {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(275px, 0.9fr);
+  gap: 1.5rem;
+  padding: 1.35rem;
+  background: var(--cream-alt);
+  border: var(--border-ink);
+  border-radius: 20px;
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+.builder-group {
+  margin-bottom: 1.15rem;
+}
+
+.builder-group:last-child {
+  margin-bottom: 0;
+}
+
+.builder-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+
+.toppings-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.topping-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.85rem;
+  background: var(--paper-white);
+  color: var(--ink);
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius-pill);
+  box-shadow: 3px 3px 0 var(--ink);
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.14s ease, background-color 0.14s ease, box-shadow 0.14s ease;
+}
+
+.topping-chip:hover {
+  transform: translateY(-2px);
+  background: #fff3bf;
+}
+
+.topping-chip.is-selected,
+.topping-chip.selected,
+.topping-chip.active,
+.topping-chip[aria-pressed='true'] {
+  background: var(--harveys-gold);
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.combo-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.combo-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.48rem 0.92rem;
+  background: var(--paper-white);
+  color: var(--ink);
+  border: 2.5px solid var(--ink);
+  border-radius: 14px;
+  box-shadow: 3px 3px 0 var(--ink);
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.14s ease, background-color 0.14s ease, box-shadow 0.14s ease;
+}
+
+.combo-chip:hover {
+  transform: translateY(-2px);
+  background: #ffe8cc;
+}
+
+.combo-chip.is-selected,
+.combo-chip.selected,
+.combo-chip.active,
+.combo-chip[aria-pressed='true'] {
+  background: var(--orange-dark);
+  color: #ffffff;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.order-ticket {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.9rem;
+  padding: 1.2rem;
+  background: #fffdf7;
+  border: var(--border-ink);
+  border-radius: 18px;
+  box-shadow: 6px 6px 0 var(--ink);
+  background-image: linear-gradient(
+    to bottom,
+    rgba(232, 93, 4, 0.08) 0,
+    rgba(232, 93, 4, 0.08) 54px,
+    transparent 54px
+  );
+}
+
+.order-ticket-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 3px dashed var(--ink);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--orange-deep);
+}
+
+.order-ticket-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  font-size: 0.95rem;
+}
+
+.order-ticket-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 2px dotted rgba(27, 17, 8, 0.25);
+}
+
+.order-ticket-stamp {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 0.25rem 0.75rem;
+  border: 3px solid var(--orange-deep);
+  border-radius: 10px;
+  color: var(--orange-deep);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  transform: rotate(-3deg);
+}
+
+/* ==========================================================================
+   Section 3: Date Activities Grid (FNAF, YouTube, WandaVision)
+   ========================================================================== */
+.activities-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.activity-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.35rem;
+}
+
+.activity-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.activity-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.85rem;
+}
+
+.activity-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.26rem 0.75rem;
+  margin-bottom: 0.45rem;
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius-pill);
+  box-shadow: 2px 2px 0 var(--ink);
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* 1) FNAF & Horror Card — Cozy Spooky Purple / Amber */
+.card-fnaf {
+  background: linear-gradient(170deg, #faf5ff 0%, #f3e8ff 100%);
+}
+
+.card-fnaf .activity-badge {
+  background: var(--fnaf-purple);
+  color: #ffffff;
+}
+
+.card-fnaf .chicken-slot {
+  background: #2e1065;
+  border-color: var(--ink);
+}
+
+.fnaf-meter-box,
+.horror-panel {
+  padding: 0.9rem;
+  background: #2e1065;
+  color: #fef3c7;
+  border: var(--border-thin);
+  border-radius: 16px;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.fnaf-meter-track {
+  width: 100%;
+  height: 18px;
+  background: #1a0b38;
+  border: 2.5px solid #fef3c7;
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  margin: 0.5rem 0;
+}
+
+.fnaf-meter-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--fnaf-amber) 0%, #ef4444 100%);
+  border-radius: var(--radius-pill);
+  transition: width 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* 2) YouTube Card — Bright Comic Red / White */
+.card-youtube {
+  background: linear-gradient(170deg, #ffffff 0%, #fff1f2 100%);
+}
+
+.card-youtube .activity-badge {
+  background: var(--yt-red);
+  color: #ffffff;
+}
+
+.card-youtube .chicken-slot {
+  background: #ffe4e6;
+}
+
+.now-playing-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.58rem 0.9rem;
+  background: var(--harveys-gold);
+  color: var(--ink);
+  border: var(--border-thin);
+  border-radius: 14px;
+  box-shadow: 4px 4px 0 var(--ink);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+
+.youtube-queue-list,
+#youtube-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.youtube-queue-item,
+#youtube-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.48rem 0.7rem;
+  background: var(--paper-white);
+  border: 2.5px solid var(--ink);
+  border-radius: 12px;
+  box-shadow: 3px 3px 0 var(--ink);
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: transform 0.14s ease, background-color 0.14s ease, box-shadow 0.14s ease;
+}
+
+.youtube-queue-item.is-current {
+  background: #fff3bf;
+  box-shadow: 0 0 0 2.5px var(--yt-red), 4px 4px 0 var(--ink);
+}
+
+.youtube-queue-item.is-done {
+  background: #f1f5f9;
+  opacity: 0.8;
+}
+
+.youtube-queue-item.is-done .checklist-toggle-btn {
+  text-decoration: line-through;
+}
+
+.youtube-input-row {
+  display: flex;
+  align-items: stretch;
+  gap: 0.5rem;
+}
+
+.youtube-input-row .cartoon-input {
+  min-width: 0;
+  flex: 1 1 auto;
+  width: auto;
+}
+
+.youtube-input-row .cartoon-btn {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* 3) WandaVision Card — Retro Hex Crimson / Teal TV */
+.card-wandavision {
+  background: linear-gradient(170deg, #fdf2f8 0%, #ecfeff 100%);
+}
+
+.card-wandavision .activity-badge {
+  background: var(--wv-crimson);
+  color: #ffffff;
+}
+
+.card-wandavision .chicken-slot {
+  background: #ccfbf1;
+}
+
+.retro-tv-box {
+  position: relative;
+  padding: 0.95rem;
+  background: linear-gradient(145deg, var(--wv-crimson) 0%, #9f1239 100%);
+  color: #ffffff;
+  border: var(--border-ink);
+  border-radius: 22px;
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+.retro-tv-screen {
+  padding: 0.85rem;
+  background: linear-gradient(135deg, #134e4a 0%, var(--wv-teal) 55%, #0f766e 100%);
+  color: #f0fdfa;
+  border: 3px solid var(--ink);
+  border-radius: 14px;
+  box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.18);
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.06) 0px,
+      rgba(255, 255, 255, 0.06) 2px,
+      transparent 2px,
+      transparent 5px
+    ),
+    linear-gradient(135deg, #134e4a 0%, var(--wv-teal) 100%);
+}
+
+.retro-tv-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.65rem;
+}
+
+.retro-tv-dial {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--harveys-gold);
+  border: 2.5px solid var(--ink);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.episode-pill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.episode-chip {
+  padding: 0.35rem 0.7rem;
+  background: var(--paper-white);
+  color: var(--ink);
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--ink);
+  transition: transform 0.14s ease, background-color 0.14s ease;
+}
+
+.episode-chip:hover {
+  transform: translateY(-2px);
+}
+
+.episode-chip.is-watched,
+.episode-chip.active {
+  background: var(--wv-teal-bright);
+  color: var(--ink);
+}
+
+.episode-chip.is-selected {
+  box-shadow: 0 0 0 3px var(--wv-crimson), 3px 3px 0 var(--ink);
+}
+
+/* ==========================================================================
+   Section 4: Subnautica Alarms Reminder Card
+   ========================================================================== */
+.alarm-card {
+  background: linear-gradient(150deg, #ecfeff 0%, #cffafe 55%, #fff9db 100%);
+  border-color: var(--ink);
+  box-shadow: 0 0 0 5px var(--alarm-yellow), 10px 10px 0 var(--ink);
+}
+
+.alarm-card .section-kicker {
+  background: var(--alarm-red);
+  color: #ffffff;
+}
+
+.alarm-banner-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 0.85rem 1.1rem;
+  margin-bottom: 1.25rem;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--alarm-yellow),
+    var(--alarm-yellow) 16px,
+    #fde047 16px,
+    #facc15 32px
+  );
+  border: var(--border-ink);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+.alarm-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(240px, 0.85fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.alarm-form-row {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr) auto;
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+}
+
+.alarm-checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.alarm-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  padding: 0.65rem 0.9rem;
+  background: #f1f5f9;
+  border: var(--border-thin);
+  border-radius: 14px;
+  box-shadow: 4px 4px 0 var(--ink);
+  font-weight: 700;
+  opacity: 0.86;
+  transition: transform 0.16s ease, box-shadow 0.16s ease, background-color 0.16s ease;
+}
+
+.alarm-item.is-armed {
+  background: var(--paper-white);
+  opacity: 1;
+  box-shadow: 0 0 0 3px var(--sub-aqua), 5px 5px 0 var(--ink);
+}
+
+.alarm-item.is-armed .alarm-time-badge {
+  background: var(--alarm-yellow);
+}
+
+.alarm-item.is-done,
+.alarm-item.checked {
+  background: #d1fae5;
+  opacity: 0.88;
+}
+
+.alarm-item.is-done .checklist-toggle-btn,
+.alarm-item.checked .checklist-toggle-btn {
+  text-decoration: line-through;
+}
+
+.alarm-time-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
+  padding: 0.25rem 0.65rem;
+  background: var(--sub-aqua);
+  color: var(--ink);
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-display);
+  font-size: 0.86rem;
+}
+
+.alarm-actions-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+
+#subnautica-chicken-slot {
+  width: 100%;
+  min-height: 210px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: linear-gradient(180deg, #67e8f9 0%, #0891b2 100%);
+  border: var(--border-ink);
+  border-radius: 20px;
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+#subnautica-chicken-slot svg {
+  width: min(195px, 100%);
+  height: auto;
+  animation: chicken-wobble 3.2s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   Section 5: Full Date Timeline
+   ========================================================================== */
+.timeline-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.timeline-step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 1rem 1rem 1.1rem;
+  background: var(--paper-white);
+  border: var(--border-thin);
+  border-radius: 18px;
+  box-shadow: 5px 5px 0 var(--ink);
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.18s ease,
+    background-color 0.18s ease;
+}
+
+.timeline-step:hover {
+  transform: translateY(-4px);
+  box-shadow: 8px 8px 0 var(--ink);
+  background: #fff9db;
+}
+
+.timeline-step.is-done {
+  background: #d3f9d8;
+  box-shadow: 0 0 0 3px #16a34a, 6px 6px 0 var(--ink);
+}
+
+.timeline-step.is-done .timeline-step-num {
+  background: #16a34a;
+  color: #ffffff;
+}
+
+.timeline-step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 0.55rem;
+  background: var(--orange-dark);
+  color: #ffffff;
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius-pill);
+  box-shadow: 2px 2px 0 var(--ink);
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+}
+
+.timeline-step-time {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--orange-deep);
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   Footer & Confetti / Cluck Strip
+   ========================================================================== */
+.cartoon-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  background: var(--cream-bg);
+  border: var(--border-ink);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 1.65rem 1.5rem;
+}
+
+#footer-chickens {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+/* Interactive Lists & Small Pills inside Activity Cards */
+.watchlist-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.watchlist-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.42rem 0.68rem;
+  background: rgba(255, 255, 255, 0.94);
+  border: 2.5px solid var(--ink);
+  border-radius: 12px;
+  box-shadow: 2px 2px 0 var(--ink);
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: background-color 0.14s ease, opacity 0.14s ease;
+}
+
+.watchlist-item.is-done {
+  background: #e2e8f0;
+  opacity: 0.78;
+}
+
+.watchlist-item.is-done .checklist-toggle-btn {
+  text-decoration: line-through;
+}
+
+.mini-btn {
+  flex-shrink: 0;
+  padding: 0.3rem 0.68rem;
+  min-height: 32px;
+  background: var(--harveys-gold);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-pill);
+  box-shadow: 2px 2px 0 var(--ink);
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.mini-btn:hover {
+  background: #ffe066;
+  transform: translateY(-1px);
+}
+
+.mini-btn.is-selected {
+  background: #16a34a;
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   Playful Cartoon Keyframe Animations & Interactive Feedback States
+   ========================================================================== */
+.is-ringing {
+  animation: alarm-ring-pulse 0.45s ease-in-out 3;
+}
+
+.is-spooked {
+  animation: card-spook-shake 0.48s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+.is-clucking {
+  animation: sticker-cluck-hop 0.48s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes chicken-wobble {
+  0%,
+  100% {
+    transform: rotate(-2deg) translateY(0);
+  }
+  25% {
+    transform: rotate(2.5deg) translateY(-4px);
+  }
+  50% {
+    transform: rotate(-1.5deg) translateY(1px);
+  }
+  75% {
+    transform: rotate(2deg) translateY(-3px);
+  }
+}
+
+@keyframes alarm-bell-shake {
+  0%,
+  65%,
+  100% {
+    transform: rotate(0deg);
+  }
+  70% {
+    transform: rotate(-16deg);
+  }
+  75% {
+    transform: rotate(16deg);
+  }
+  80% {
+    transform: rotate(-14deg);
+  }
+  85% {
+    transform: rotate(14deg);
+  }
+  90% {
+    transform: rotate(-8deg);
+  }
+  95% {
+    transform: rotate(6deg);
+  }
+}
+
+@keyframes card-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) translateY(14px);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.015) translateY(-2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes alarm-ring-pulse {
+  0%,
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
+  20% {
+    transform: translateX(-5px) rotate(-1.5deg);
+  }
+  40% {
+    transform: translateX(5px) rotate(1.5deg);
+  }
+  60% {
+    transform: translateX(-4px) rotate(-1deg);
+  }
+  80% {
+    transform: translateX(4px) rotate(1deg);
+  }
+}
+
+@keyframes card-spook-shake {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  15% {
+    transform: translate3d(-6px, -2px, 0) rotate(-1deg);
+  }
+  30% {
+    transform: translate3d(6px, 2px, 0) rotate(1deg);
+  }
+  45% {
+    transform: translate3d(-5px, 1px, 0) rotate(-0.8deg);
+  }
+  60% {
+    transform: translate3d(5px, -1px, 0) rotate(0.8deg);
+  }
+  75% {
+    transform: translate3d(-3px, 0, 0);
+  }
+}
+
+@keyframes sticker-cluck-hop {
+  0% {
+    transform: scale(1) translateY(0) rotate(0deg);
+  }
+  35% {
+    transform: scale(1.14) translateY(-10px) rotate(-6deg);
+  }
+  70% {
+    transform: scale(1.06) translateY(-3px) rotate(5deg);
+  }
+  100% {
+    transform: scale(1) translateY(0) rotate(0deg);
+  }
+}
+
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
+@media (max-width: 980px) {
+  .activities-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-layout,
+  .meal-builder,
+  .alarm-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .peeking-chicken {
+    width: 66px;
+    height: 66px;
+  }
+
+  .peeking-chicken--top-right,
+  .peeking-chicken--top-left {
+    top: -42px;
+  }
+
+  .peeking-chicken--bottom-right {
+    bottom: -40px;
+  }
+}
+
+@media (max-width: 640px) {
+  body.harveys-striped-bg {
+    background-image: repeating-linear-gradient(
+      90deg,
+      #ffb668 0px,
+      #ffb668 42px,
+      #e85d04 42px,
+      #e85d04 84px
+    );
+  }
+
+  .page-shell {
+    width: calc(100% - 1.15rem);
+    margin: 2.85rem auto 2rem;
+    gap: 2.65rem;
+  }
+
+  .cartoon-card {
+    border-radius: 20px;
+    box-shadow: 6px 6px 0 var(--ink);
+    padding: 1.15rem;
+  }
+
+  .alarm-sticky-bar {
+    padding: 0.42rem 0.65rem;
+    font-size: 0.78rem;
+    line-height: 1.25;
+    gap: 0.35rem 0.55rem;
+  }
+
+  .alarm-sticky-bar .spice-pill,
+  .alarm-sticky-bar .alarm-banner-link {
+    padding: 0.2rem 0.65rem;
+    font-size: 0.78rem;
+  }
+
+  .alarm-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .youtube-input-row {
+    flex-direction: column;
+  }
+
+  .youtube-input-row .cartoon-input {
+    width: 100%;
+  }
+
+  .peeking-chicken--top-right,
+  .peeking-chicken--top-left {
+    top: -34px;
+    right: 12px;
+    width: 54px;
+    height: 54px;
+  }
+
+  .peeking-chicken--top-left {
+    right: auto;
+    left: 12px;
+  }
+
+  .peeking-chicken--bottom-right {
+    bottom: -32px;
+    right: 12px;
+    width: 54px;
+    height: 54px;
+  }
+
+  .chicken-slot {
+    width: 88px;
+    height: 88px;
+  }
+}
+
+/* ==========================================================================
+   Reduced Motion Accessibility
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

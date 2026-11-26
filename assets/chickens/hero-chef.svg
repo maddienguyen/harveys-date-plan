@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 280" width="320" height="280" role="img" aria-label="Cartoon chicken chef in a Harvey's orange cap and apron holding a giant crispy chicken sandwich">
+  <!-- Warm comic burst backdrop -->
+  <path d="M164 26 L186 58 L224 38 L228 76 L270 72 L254 108 L292 126 L264 154 L290 186 L252 198 L260 236 L220 226 L204 256 L174 232 L144 256 L130 224 L92 238 L100 200 L62 190 L86 158 L54 134 L88 112 L72 74 L112 78 L118 40 L152 60 Z" fill="#ffe8cc" opacity="0.85" />
+  <ellipse cx="156" cy="256" rx="112" ry="13" fill="#1b1108" fill-opacity="0.14" />
+
+  <!-- Comic sparkles and motion accents -->
+  <path d="M36 58 L41 70 L53 75 L41 80 L36 92 L31 80 L19 75 L31 70 Z" fill="#ffd43b" stroke="#1b1108" stroke-width="2.5" stroke-linejoin="round" />
+  <path d="M286 46 L290 56 L300 60 L290 64 L286 74 L282 64 L272 60 L282 56 Z" fill="#ffd43b" stroke="#1b1108" stroke-width="2.5" stroke-linejoin="round" />
+  <circle cx="294" cy="206" r="5" fill="#ff7b00" stroke="#1b1108" stroke-width="2.5" />
+  <path d="M214 68 C210 58, 220 52, 216 42" fill="none" stroke="#ff7b00" stroke-width="3" stroke-linecap="round" />
+  <path d="M236 66 C232 54, 244 48, 240 36" fill="none" stroke="#ff7b00" stroke-width="3" stroke-linecap="round" />
+  <path d="M256 70 C253 60, 263 54, 259 44" fill="none" stroke="#ff7b00" stroke-width="3" stroke-linecap="round" />
+
+  <!-- Tail feathers -->
+  <path d="M84 172 C64 156, 38 158, 36 172 C34 182, 48 184, 52 184 C36 190, 36 204, 50 206 C58 207, 68 202, 74 198 C64 208, 70 218, 86 212 Z" fill="#fff9ef" stroke="#1b1108" stroke-width="4" stroke-linejoin="round" />
+  <path d="M52 184 C62 184, 72 186, 80 190" fill="none" stroke="#f3d9b1" stroke-width="4" stroke-linecap="round" />
+
+  <!-- Legs and feet -->
+  <path d="M104 218 L100 244 L82 248 C77 249, 77 256, 84 256 L98 255 L96 260 C95 264, 102 265, 105 260 L108 255 L118 258 C124 259, 126 252, 120 250 L110 245 L114 218 Z" fill="#ffa94d" stroke="#1b1108" stroke-width="3.5" stroke-linejoin="round" />
+  <path d="M142 218 L146 244 L134 250 C128 252, 130 259, 136 258 L146 255 L148 260 C150 265, 157 264, 157 259 L156 255 L169 256 C176 256, 176 249, 170 248 L156 244 L152 218 Z" fill="#ffa94d" stroke="#1b1108" stroke-width="3.5" stroke-linejoin="round" />
+
+  <!-- Plump body -->
+  <path d="M84 134 C68 162, 66 204, 92 222 C110 234, 146 234, 162 220 C182 202, 180 162, 160 134 Z" fill="#fff9ef" stroke="#1b1108" stroke-width="4" stroke-linejoin="round" />
+  <path d="M150 142 C168 166, 168 198, 150 218 C140 226, 122 228, 110 224 C138 222, 156 204, 156 176 C156 160, 152 150, 150 142 Z" fill="#f3d9b1" />
+
+  <!-- Apron waist tie bows -->
+  <path d="M82 174 C68 166, 60 176, 70 184 C60 190, 68 200, 82 188" fill="#fff9ef" stroke="#1b1108" stroke-width="3.5" stroke-linejoin="round" />
+  <path d="M168 172 C180 164, 188 174, 178 182" fill="#fff9ef" stroke="#1b1108" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Harvey's-style Orange Apron -->
+  <path d="M98 138 L94 168 C82 176, 78 200, 84 220 C108 230, 144 230, 166 218 C172 198, 168 176, 156 168 L152 138 Z" fill="#e85d04" stroke="#1b1108" stroke-width="4" stroke-linejoin="round" />
+  <!-- Apron highlight fold & cream hem -->
+  <path d="M96 174 C90 190, 88 206, 92 216 L104 220 C100 204, 102 186, 106 172 Z" fill="#ff7b00" />
+  <path d="M84 212 C108 222, 144 222, 166 210 L166 218 C144 230, 108 230, 84 220 Z" fill="#fff9ef" stroke="#1b1108" stroke-width="3" stroke-linejoin="round" />
+  <!-- Apron pocket with H crest -->
+  <path d="M104 176 L148 176 L146 204 C146 208, 106 208, 106 204 Z" fill="#fff9ef" stroke="#1b1108" stroke-width="3.5" stroke-linejoin="round" />
+  <path d="M117 183 L117 200 M135 183 L135 200 M117 191.5 L135 191.5" fill="none" stroke="#e85d04" stroke-width="4.5" stroke-linecap="round" />
+
+  <!-- Left cheering wing -->
+  <path d="M84 152 C68 144, 52 134, 44 120 C38 112, 46 106, 54 114 C52 104, 62 102, 66 112 C68 104, 78 106, 78 118 C82 130, 86 140, 90 148" fill="#fff9ef" stroke="#1b1108" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M32 104 L24 94 M26 122 L16 122 M44 96 L42 84" fill="none" stroke="#1b1108" stroke-width="3" stroke-linecap="round" />
+
+  <!-- Head -->
+  <path d="M82 96 C72 94, 70 104, 80 108 C76 124, 94 140, 124 140 C154 140, 170 124, 166 104 C174 100, 172 90, 162 90 C162 66, 144 50, 120 50 C94 50, 78 70, 82 96 Z" fill="#fff9ef" stroke="#1b1108" stroke-width="4" stroke-linejoin="round" />
+  <path d="M92 126 C110 138, 142 138, 158 122 C142 132, 114 132, 92 126 Z" fill="#f3d9b1" />
+
+  <!-- Bright Red Comb peeking out front of cap -->
+  <path d="M108 54 C100 38, 112 24, 124 34 C128 20, 144 22, 144 38 C154 32, 162 44, 152 54 Z" fill="#ff3b30" stroke="#1b1108" stroke-width="3.5" stroke-linejoin="round" />
+  <path d="M116 42 C116 36, 120 35, 122 38" fill="none" stroke="#ff8787" stroke-width="3" stroke-linecap="round" />
+
+  <!-- Harvey's-Style Orange Cap -->
+  <path d="M78 72 C76 46, 98 34, 122 38 C144 42, 156 54, 156 70 Z" fill="#e85d04" stroke="#1b1108" stroke-width="4" stroke-linejoin="round" />
+  <path d="M84 68 C84 52, 98 44, 112 44 C98 50, 92 60, 92 68 Z" fill="#ff7b00" />
+  <!-- Cap front cream emblem -->
+  <circle cx="118" cy="56" r="12" fill="#fff9ef" stroke="#1b1108" stroke-width="3" />
+  <path d="M113 50 L113 62 M123 50 L123 62 M113 56 L123 56" fill="none" stroke="#e85d04" stroke-width="3.5" stroke-linecap="round" />
+  <!-- Cap visor -->
+  <path d="M112 68 C136 58, 168 58, 186 70 C188 75, 178 79, 158 76 C138 73, 122 73, 110 74 Z" fill="#d9480f" stroke="#1b1108" stroke-width="4" stroke-linejoin="round" />
+  <path d="M126 67 C146 63, 166 64, 178 70" fill="none" stroke="#ff922b" stroke-width="2.5" stroke-linecap="round" />
+
+  <!-- Expressive Eyes & Eyebrows -->
+  <path d="M104 74 C110 68, 118 68, 124 72" fill="none" stroke="#1b1108" stroke-width="3" stroke-linecap="round" />
+  <path d="M136 72 C142 67, 150 68, 155 73" fill="none" stroke="#1b1108" stroke-width="3" stroke-linecap="round" />
+  <ellipse cx="116" cy="88" rx="10" ry="12" fill="#ffffff" stroke="#1b1108" stroke-width="3" />
+  <ellipse cx="144" cy="86" rx="9.5" ry="11.5" fill="#ffffff" stroke="#1b1108" stroke-width="3" />
+  <ellipse cx="119" cy="88" rx="5.5" ry="7" fill="#1b1108" />
+  <ellipse cx="146" cy="86" rx="5.2" ry="6.8" fill="#1b1108" />
+  <circle cx="121" cy="84" r="2.3" fill="#ffffff" />
+  <circle cx="148" cy="82" r="2.2" fill="#ffffff" />
+
+  <!-- Rosy cheek blush -->
+  <ellipse cx="96" cy="104" rx="8" ry="5" fill="#ff8787" opacity="0.7" />
+
+  <!-- Red wattles under beak -->
+  <path d="M126 114 C120 124, 122 134, 129 134 C135 134, 136 124, 134 116" fill="#ff3b30" stroke="#1b1108" stroke-width="3" stroke-linejoin="round" />
+  <path d="M135 114 C134 124, 137 132, 143 131 C149 130, 148 120, 143 114" fill="#e03131" stroke="#1b1108" stroke-width="3" stroke-linejoin="round" />
+
+  <!-- Big Smiling Open Beak -->
+  <path d="M128 96 C144 92, 166 96, 174 103 C166 108, 148 109, 130 106 Z" fill="#fcc419" stroke="#1b1108" stroke-width="3.5" stroke-linejoin="round" />
+  <path d="M132 106 C148 107, 162 106, 168 104 C164 117, 148 122, 132 115 Z" fill="#c92a2a" stroke="#1b1108" stroke-width="3.5" stroke-linejoin="round" />
+  <path d="M140 114 C147 110, 156 111, 159 115 C153 118, 144 118, 140 114 Z" fill="#ff8787" />
+  <path d="M130 105 C144 116, 160 117, 169 105 C163 119, 144 123, 130 115 Z" fill="#f59f00" stroke="#1b1108" stroke-width="3" stroke-linejoin="round" />
+
+  <!-- GIANT CRISPY CHICKEN SANDWICH (held proudly on right) -->
+  <!-- Striped Harvey's-style wrapper tray -->
+  <path d="M178 182 L284 176 L274 208 C252 216, 210 216, 186 208 Z" fill="#fff9ef" stroke="#1b1108" stroke-width="4" stroke-linejoin="round" />
+  <path d="M196 184 L208 209 M222 182 L232 210 M248 180 L256 209" fill="none" stroke="#ff7b00" stroke-width="5" stroke-linecap="round" />
+  <path d="M178 182 L284 176 L274 208 C252 216, 210 216, 186 208 Z" fill="none" stroke="#1b1108" stroke-width="4" stroke-linejoin="round" />
+
+  <!-- Bottom toasted bun -->
+  <path d="M186 166 L276 166 C280 180, 272 188, 256 190 L204 190 C190 188, 182 180, 186 166 Z" fill="#f4a261" stroke="#1b1108" stroke-width="4" stroke-linejoin="round" />
+  <path d="M190 176 C214 184, 248 184, 274 176" fill="none" stroke="#e76f51" stroke-width="4" stroke-linecap="round" />
+
+  <!-- Giant crunchy crispy chicken fillet -->
+  <path d="M174 150 C170 138, 184 132, 198 136 C210 128, 230 130, 244 134 C260 128, 282 134, 286 146 C294 156, 286 170, 272 170 C258 176, 236 172, 222 174 C204 176, 184 172, 178 164 C170 160, 172 154, 174 150 Z" fill="#f59f00" stroke="#1b1108" stroke-width="4" stroke-linejoin="round" />
+  <!-- Crunchy golden ridges & toasted crisp texture -->
+  <path d="M188 148 C200 142, 214 146, 228 144 C244 142, 260 146, 274 148" fill="none" stroke="#ffd43b" stroke-width="4.5" stroke-linecap="round" />
+  <path d="M186 160 C206 166, 238 168, 270 162" fill="none" stroke="#d9480f" stroke-width="4" stroke-linecap="round" />
+  <circle cx="196" cy="154" r="2.5" fill="#d9480f" />
+  <circle cx="256" cy="154" r="2.5" fill="#d9480f" />
+  <circle cx="272" cy="156" r="2" fill="#ffd43b" />
+
+  <!-- Melted cheddar cheese corner -->
+  <path d="M204 134 L256 134 L232 162 Z" fill="#ffd43b" stroke="#1b1108" stroke-width="3.5" stroke-linejoin="round" />
+  <path d="M214 138 L244 138 L231 154 Z" fill="#fff3bf" />
+
+  <!-- Ruffled crisp lettuce -->
+  <path d="M176 130 C176 120, 192 118, 202 124 C212 116, 230 116, 240 124 C252 116, 272 118, 282 126 C290 132, 284 142, 270 138 C258 144, 242 138, 230 142 C216 144, 200 138, 188 140 C176 142, 174 136, 176 130 Z" fill="#51cf66" stroke="#1b1108" stroke-width="3.5" stroke-linejoin="round" />
+  <path d="M190 132 C206 128, 224 132, 240 129 C254 126, 266 131, 274 132" fill="none" stroke="#2f9e44" stroke-width="3" stroke-linecap="round" />
+
+  <!-- Juicy tomato slices -->
+  <path d="M188 118 L234 118 C236 126, 226 130, 210 130 C196 130, 186 126, 188 118 Z" fill="#ff4d4d" stroke="#1b1108" stroke-width="3.5" stroke-linejoin="round" />
+  <path d="M232 118 L276 118 C278 126, 268 130, 254 130 C240 130, 230 126, 232 118 Z" fill="#ff4d4d" stroke="#1b1108" stroke-width="3.5" stroke-linejoin="round" />
+  <path d="M196 122 L222 122 M242 122 L266 122" fill="none" stroke="#ff8787" stroke-width="2.5" stroke-linecap="round" />
+
+  <!-- Creamy mayo dollop swirl -->
+  <path d="M194 114 C202 108, 214 116, 224 112 C234 108, 246 116, 256 112 C264 110, 272 114, 268 118 L194 118 Z" fill="#fff9ef" stroke="#1b1108" stroke-width="3" stroke-linejoin="round" />
+
+  <!-- Domed sesame top bun -->
+  <path d="M184 114 C182 86, 206 72, 232 72 C258 72, 282 86, 280 114 Z" fill="#f4a261" stroke="#1b1108" stroke-width="4" stroke-linejoin="round" />
+  <path d="M196 96 C204 82, 224 78, 244 80 C222 84, 208 92, 200 104 Z" fill="#ffc078" />
+  <!-- Sesame seeds -->
+  <ellipse cx="206" cy="94" rx="4" ry="2.2" transform="rotate(-20 206 94)" fill="#fff3bf" stroke="#1b1108" stroke-width="1.5" />
+  <ellipse cx="228" cy="84" rx="4.2" ry="2.2" transform="rotate(8 228 84)" fill="#fff3bf" stroke="#1b1108" stroke-width="1.5" />
+  <ellipse cx="250" cy="89" rx="4" ry="2.2" transform="rotate(24 250 89)" fill="#fff3bf" stroke="#1b1108" stroke-width="1.5" />
+  <ellipse cx="218" cy="100" rx="4" ry="2.2" transform="rotate(-8 218 100)" fill="#fff3bf" stroke="#1b1108" stroke-width="1.5" />
+  <ellipse cx="242" cy="101" rx="4" ry="2.2" transform="rotate(14 242 101)" fill="#fff3bf" stroke="#1b1108" stroke-width="1.5" />
+  <ellipse cx="264" cy="101" rx="3.8" ry="2" transform="rotate(30 264 101)" fill="#fff3bf" stroke="#1b1108" stroke-width="1.5" />
+
+  <!-- Right wing cradling the sandwich tray -->
+  <path d="M158 158 C168 172, 174 188, 188 194 C196 198, 204 192, 198 184 C204 184, 206 174, 196 172 C188 170, 180 162, 170 150" fill="#fff9ef" stroke="#1b1108" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
