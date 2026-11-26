@@ -116,11 +116,109 @@
     };
   }
 
-  function createInitialState(menu) {
+  function getRecommendationsData() {
+    var raw = window.HARVEYS_RECOMMENDATIONS || {};
+    return {
+      youtubeLinks: Array.isArray(raw.youtubeLinks) ? raw.youtubeLinks : [],
+      gamesList: Array.isArray(raw.gamesList) ? raw.gamesList : []
+    };
+  }
+
+  function isSafeHttpUrl(url) {
+    return typeof url === 'string' && /^https?:\/\/\S+$/i.test(url.trim());
+  }
+
+  function parseTitleAndUrl(rawInput, fallbackTitlePrefix) {
+    var text = String(rawInput || '').trim();
+    var match = text.match(/(https?:\/\/[^\s]+)/i);
+    if (!match) {
+      return { title: text, url: '' };
+    }
+    var rawUrl = match[1].replace(/["'<>]+$/, '');
+    var cleanedTitle = text.replace(match[1], '').replace(/\s+/g, ' ').trim();
+    if (!cleanedTitle) {
+      var shortDisplay = rawUrl.replace(/^https?:\/\/(www\.)?/i, '');
+      if (shortDisplay.length > 38) shortDisplay = shortDisplay.slice(0, 35) + '...';
+      cleanedTitle = (fallbackTitlePrefix || 'Link') + ': ' + shortDisplay;
+    }
+    return {
+      title: cleanedTitle,
+      url: isSafeHttpUrl(rawUrl) ? rawUrl : ''
+    };
+  }
+
+  function cloneRecItem(item) {
+    var copy = {};
+    Object.keys(item).forEach(function (k) {
+      copy[k] = item[k];
+    });
+    copy.done = Boolean(item.done);
+    return copy;
+  }
+
+  function mergeRecommendationItems(savedItems, recItems, dismissedIds, legacyPlaceholderIds) {
+    var recById = {};
+    recItems.forEach(function (item) {
+      recById[item.id] = item;
+    });
+
+    var dismissedMap = {};
+    (Array.isArray(dismissedIds) ? dismissedIds : []).forEach(function (id) {
+      dismissedMap[id] = true;
+    });
+
+    var legacyMap = {};
+    (Array.isArray(legacyPlaceholderIds) ? legacyPlaceholderIds : []).forEach(function (id) {
+      legacyMap[id] = true;
+    });
+
+    var savedRecById = {};
+    var customOrDoneLegacy = [];
+    (Array.isArray(savedItems) ? savedItems : []).forEach(function (item) {
+      if (!item || !item.id) return;
+      if (recById[item.id]) {
+        var upgraded = cloneRecItem(recById[item.id]);
+        upgraded.done = Boolean(item.done);
+        savedRecById[item.id] = upgraded;
+      } else if (legacyMap[item.id] && !item.done && !item.url) {
+        // Upgrade out untouched v1 placeholder entries so real links appear cleanly
+      } else {
+        customOrDoneLegacy.push(cloneRecItem(item));
+      }
+    });
+
+    var merged = [];
+    recItems.forEach(function (rec) {
+      if (savedRecById[rec.id]) {
+        merged.push(savedRecById[rec.id]);
+      } else if (!dismissedMap[rec.id]) {
+        var fresh = cloneRecItem(rec);
+        fresh.done = false;
+        merged.push(fresh);
+      }
+    });
+
+    customOrDoneLegacy.forEach(function (extra) {
+      merged.push(extra);
+    });
+
+    return merged;
+  }
+
+  function createInitialState(menu, recs) {
+    var recommendations = recs || getRecommendationsData();
     var defaultToppings = [];
     for (var i = 0; i < menu.toppings.length && i < 4; i++) {
       defaultToppings.push(menu.toppings[i].name);
     }
+
+    var initialGames = recommendations.gamesList.length
+      ? recommendations.gamesList.map(function (g) { var c = cloneRecItem(g); c.done = false; return c; })
+      : DEFAULT_FNAF_GAMES.map(function (g) { return { id: g.id, title: g.title, genre: 'Horror', isCoop: false, priceLabel: '', underFive: false, url: '', note: '', done: g.done }; });
+
+    var initialYoutube = recommendations.youtubeLinks.length
+      ? recommendations.youtubeLinks.map(function (v) { var c = cloneRecItem(v); c.done = false; return c; })
+      : DEFAULT_YOUTUBE_QUEUE.map(function (v) { return { id: v.id, title: v.title, channel: '', category: 'Games', url: '', vibe: '', done: v.done }; });
 
     return {
       selectedSandwichId: menu.sandwiches[0] ? menu.sandwiches[0].id : '',
@@ -133,11 +231,15 @@
       fnaf: {
         jumpscares: 0,
         mode: 'Cozy Blanket Shield',
-        games: DEFAULT_FNAF_GAMES.map(function (g) { return { id: g.id, title: g.title, done: g.done }; })
+        filter: 'All',
+        dismissedIds: [],
+        games: initialGames
       },
       youtube: {
-        nowPlayingId: DEFAULT_YOUTUBE_QUEUE[0].id,
-        items: DEFAULT_YOUTUBE_QUEUE.map(function (v) { return { id: v.id, title: v.title, done: v.done }; })
+        filter: 'All',
+        dismissedIds: [],
+        nowPlayingId: initialYoutube[0] ? initialYoutube[0].id : '',
+        items: initialYoutube
       },
       wanda: {
         currentEp: 1,
@@ -151,8 +253,9 @@
     };
   }
 
-  function loadState(menu) {
-    var fallback = createInitialState(menu);
+  function loadState(menu, recs) {
+    var recommendations = recs || getRecommendationsData();
+    var fallback = createInitialState(menu, recommendations);
     try {
       var saved = window.localStorage ? window.localStorage.getItem(STORAGE_KEY) : null;
       if (!saved) return fallback;
@@ -175,14 +278,47 @@
       if (typeof parsed.orderLocked === 'boolean') fallback.orderLocked = parsed.orderLocked;
       if (typeof parsed.orderNumber === 'string') fallback.orderNumber = parsed.orderNumber;
 
+      var VALID_GAME_FILTERS = ['All', 'Horror', 'Co-Op < $5', 'Other Pick'];
+      var VALID_YT_FILTERS = ['All', 'Travel', 'Food', 'Business', 'Games', 'Tech'];
+
       if (parsed.fnaf && typeof parsed.fnaf === 'object') {
         if (typeof parsed.fnaf.jumpscares === 'number') fallback.fnaf.jumpscares = Math.max(0, parsed.fnaf.jumpscares);
         if (typeof parsed.fnaf.mode === 'string') fallback.fnaf.mode = parsed.fnaf.mode;
-        if (Array.isArray(parsed.fnaf.games) && parsed.fnaf.games.length) fallback.fnaf.games = parsed.fnaf.games;
+        if (typeof parsed.fnaf.filter === 'string' && VALID_GAME_FILTERS.indexOf(parsed.fnaf.filter) !== -1) {
+          fallback.fnaf.filter = parsed.fnaf.filter;
+        }
+        if (Array.isArray(parsed.fnaf.dismissedIds)) fallback.fnaf.dismissedIds = parsed.fnaf.dismissedIds.slice();
+        if (Array.isArray(parsed.fnaf.games) && parsed.fnaf.games.length) {
+          fallback.fnaf.games = recommendations.gamesList.length
+            ? mergeRecommendationItems(
+                parsed.fnaf.games,
+                recommendations.gamesList,
+                fallback.fnaf.dismissedIds,
+                ['indie-horror']
+              )
+            : parsed.fnaf.games;
+        }
       }
       if (parsed.youtube && typeof parsed.youtube === 'object') {
-        if (parsed.youtube.nowPlayingId) fallback.youtube.nowPlayingId = parsed.youtube.nowPlayingId;
-        if (Array.isArray(parsed.youtube.items) && parsed.youtube.items.length) fallback.youtube.items = parsed.youtube.items;
+        if (typeof parsed.youtube.filter === 'string' && VALID_YT_FILTERS.indexOf(parsed.youtube.filter) !== -1) {
+          fallback.youtube.filter = parsed.youtube.filter;
+        }
+        if (Array.isArray(parsed.youtube.dismissedIds)) fallback.youtube.dismissedIds = parsed.youtube.dismissedIds.slice();
+        if (Array.isArray(parsed.youtube.items) && parsed.youtube.items.length) {
+          fallback.youtube.items = recommendations.youtubeLinks.length
+            ? mergeRecommendationItems(
+                parsed.youtube.items,
+                recommendations.youtubeLinks,
+                fallback.youtube.dismissedIds,
+                ['yt-1', 'yt-2', 'yt-3', 'yt-4']
+              )
+            : parsed.youtube.items;
+        }
+        if (parsed.youtube.nowPlayingId && fallback.youtube.items.some(function (v) { return v.id === parsed.youtube.nowPlayingId; })) {
+          fallback.youtube.nowPlayingId = parsed.youtube.nowPlayingId;
+        } else if (fallback.youtube.items[0]) {
+          fallback.youtube.nowPlayingId = fallback.youtube.items[0].id;
+        }
       }
       if (parsed.wanda && typeof parsed.wanda === 'object') {
         if (typeof parsed.wanda.currentEp === 'number') fallback.wanda.currentEp = Math.min(9, Math.max(1, parsed.wanda.currentEp));
@@ -962,7 +1098,35 @@
     }
   }
 
-  /* ---------- Section 2A: FNAF & Horror Games ---------- */
+  /* ---------- Section 2A: FNAF & Horror + Co-Op Games Watchlist ---------- */
+  function getFilteredGames(state) {
+    var filter = (state.fnaf && state.fnaf.filter) || 'All';
+    var games = (state.fnaf && state.fnaf.games) || [];
+    if (filter === 'All') return games;
+    if (filter === 'Co-Op < $5') {
+      return games.filter(function (g) {
+        return g.genre === 'Co-Op < $5' || (g.isCoop && g.underFive);
+      });
+    }
+    return games.filter(function (g) {
+      return (g.genre || 'Horror') === filter;
+    });
+  }
+
+  function getGameGenreBadgeInfo(game) {
+    var genre = game.genre || 'Horror';
+    if (genre === 'Co-Op < $5') {
+      return { className: 'deal-badge deal-badge--coop', text: '🤝 Co-Op < $5' };
+    }
+    if (genre === 'Other Pick') {
+      return { className: 'cat-badge cat-badge--other', text: '🎮 Other Pick' };
+    }
+    if (genre === 'Horror') {
+      return { className: 'cat-badge cat-badge--horror', text: '👻 Horror' };
+    }
+    return { className: 'cat-badge cat-badge--custom', text: genre };
+  }
+
   function renderFnafSection(state) {
     var countBadge = document.getElementById('jumpscare-count-badge');
     var meterFill = document.getElementById('jumpscare-meter-fill');
@@ -989,11 +1153,32 @@
       btn.setAttribute('aria-pressed', active ? 'true' : 'false');
     });
 
+    var currentFilter = state.fnaf.filter || 'All';
+    document.querySelectorAll('[data-games-filter]').forEach(function (btn) {
+      var f = btn.getAttribute('data-games-filter');
+      var active = currentFilter === f;
+      btn.classList.toggle('is-selected', active);
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+
     if (listEl) {
       listEl.innerHTML = '';
-      state.fnaf.games.forEach(function (game) {
+      var visibleGames = getFilteredGames(state);
+
+      if (!visibleGames.length) {
+        var emptyLi = document.createElement('li');
+        emptyLi.className = 'watchlist-item';
+        emptyLi.textContent = 'No games in this filter yet — add one below or switch to All!';
+        listEl.appendChild(emptyLi);
+        return;
+      }
+
+      visibleGames.forEach(function (game) {
         var li = document.createElement('li');
         li.className = 'watchlist-item' + (game.done ? ' is-done' : '');
+
+        var mainCol = document.createElement('div');
+        mainCol.className = 'queue-item-main';
 
         var checkBtn = document.createElement('button');
         checkBtn.type = 'button';
@@ -1005,6 +1190,52 @@
           saveState(state);
           renderFnafSection(state);
         });
+        mainCol.appendChild(checkBtn);
+
+        var metaRow = document.createElement('div');
+        metaRow.className = 'queue-item-meta';
+
+        var genreBadgeInfo = getGameGenreBadgeInfo(game);
+        var genreSpan = document.createElement('span');
+        genreSpan.className = genreBadgeInfo.className;
+        genreSpan.textContent = genreBadgeInfo.text;
+        metaRow.appendChild(genreSpan);
+
+        if (game.isCoop && game.genre !== 'Co-Op < $5') {
+          var coopSpan = document.createElement('span');
+          coopSpan.className = 'deal-badge deal-badge--coop';
+          coopSpan.textContent = '🤝 Co-Op';
+          metaRow.appendChild(coopSpan);
+        }
+
+        if (game.priceLabel) {
+          var priceSpan = document.createElement('span');
+          priceSpan.className = 'price-badge' + (game.underFive ? ' price-badge--deal' : '');
+          priceSpan.textContent = (game.underFive ? '💸 ' : '') + game.priceLabel;
+          metaRow.appendChild(priceSpan);
+        }
+
+        if (game.note) {
+          var noteSpan = document.createElement('span');
+          noteSpan.className = 'item-subnote';
+          noteSpan.textContent = game.note;
+          metaRow.appendChild(noteSpan);
+        }
+
+        mainCol.appendChild(metaRow);
+
+        var actions = document.createElement('span');
+        actions.className = 'queue-item-actions';
+
+        if (isSafeHttpUrl(game.url)) {
+          var steamLink = document.createElement('a');
+          steamLink.className = 'mini-btn steam-link-btn';
+          steamLink.href = game.url;
+          steamLink.target = '_blank';
+          steamLink.rel = 'noopener noreferrer';
+          steamLink.textContent = '↗ Steam';
+          actions.appendChild(steamLink);
+        }
 
         var rmBtn = document.createElement('button');
         rmBtn.type = 'button';
@@ -1013,12 +1244,15 @@
         rmBtn.textContent = '✕';
         rmBtn.addEventListener('click', function () {
           state.fnaf.games = state.fnaf.games.filter(function (g) { return g.id !== game.id; });
+          if (!Array.isArray(state.fnaf.dismissedIds)) state.fnaf.dismissedIds = [];
+          if (state.fnaf.dismissedIds.indexOf(game.id) === -1) state.fnaf.dismissedIds.push(game.id);
           saveState(state);
           renderFnafSection(state);
         });
+        actions.appendChild(rmBtn);
 
-        li.appendChild(checkBtn);
-        li.appendChild(rmBtn);
+        li.appendChild(mainCol);
+        li.appendChild(actions);
         listEl.appendChild(li);
       });
     }
@@ -1064,17 +1298,36 @@
       });
     });
 
+    document.querySelectorAll('[data-games-filter]').forEach(function (btn) {
+      if (btn.dataset.bound) return;
+      btn.dataset.bound = '1';
+      btn.addEventListener('click', function () {
+        state.fnaf.filter = btn.getAttribute('data-games-filter') || 'All';
+        saveState(state);
+        renderFnafSection(state);
+      });
+    });
+
     var form = document.getElementById('fnaf-add-form');
     var input = document.getElementById('fnaf-game-input');
     if (form && input && !form.dataset.bound) {
       form.dataset.bound = '1';
       form.addEventListener('submit', function (e) {
         e.preventDefault();
-        var val = input.value.trim();
-        if (!val) return;
+        var rawVal = input.value.trim();
+        if (!rawVal) return;
+        var parsed = parseTitleAndUrl(rawVal, 'Game Link');
+        var activeFilter = state.fnaf.filter || 'All';
+        var genre = activeFilter !== 'All' ? activeFilter : 'Horror';
         state.fnaf.games.push({
           id: 'game-' + Date.now(),
-          title: val,
+          title: parsed.title,
+          genre: genre,
+          isCoop: genre === 'Co-Op < $5',
+          priceLabel: '',
+          underFive: genre === 'Co-Op < $5',
+          url: parsed.url,
+          note: 'Custom date pick',
           done: false
         });
         input.value = '';
@@ -1084,7 +1337,26 @@
     }
   }
 
-  /* ---------- Section 2B: YouTube Queue ---------- */
+  /* ---------- Section 2B: YouTube Queue & Spontaneous Topic Links ---------- */
+  function getYoutubeCatBadgeClass(category) {
+    var c = String(category || '').toLowerCase();
+    if (c === 'travel') return 'cat-badge cat-badge--travel';
+    if (c === 'food') return 'cat-badge cat-badge--food';
+    if (c === 'business') return 'cat-badge cat-badge--business';
+    if (c === 'games') return 'cat-badge cat-badge--games';
+    if (c === 'tech') return 'cat-badge cat-badge--tech';
+    return 'cat-badge cat-badge--custom';
+  }
+
+  function getFilteredYoutubeItems(state) {
+    var filter = (state.youtube && state.youtube.filter) || 'All';
+    var items = (state.youtube && state.youtube.items) || [];
+    if (filter === 'All') return items;
+    return items.filter(function (v) {
+      return (v.category || 'Custom') === filter;
+    });
+  }
+
   function renderYoutubeSection(state) {
     var listEl = document.getElementById('youtube-list');
     var nowEl = document.getElementById('youtube-now-playing');
@@ -1095,23 +1367,60 @@
       progEl.textContent = watchedCount + ' / ' + state.youtube.items.length + ' watched';
     }
 
-    var activeVideo = state.youtube.items.filter(function (v) { return v.id === state.youtube.nowPlayingId; })[0]
-      || state.youtube.items.filter(function (v) { return !v.done; })[0]
+    var currentFilter = state.youtube.filter || 'All';
+    document.querySelectorAll('[data-yt-filter]').forEach(function (btn) {
+      var f = btn.getAttribute('data-yt-filter');
+      var active = currentFilter === f;
+      btn.classList.toggle('is-selected', active);
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+
+    var visibleItems = getFilteredYoutubeItems(state);
+    var activeVideo = visibleItems.filter(function (v) { return v.id === state.youtube.nowPlayingId; })[0]
+      || (currentFilter === 'All' ? state.youtube.items.filter(function (v) { return v.id === state.youtube.nowPlayingId; })[0] : null)
+      || visibleItems.filter(function (v) { return !v.done; })[0]
+      || visibleItems[0]
       || state.youtube.items[0];
 
     if (nowEl) {
-      nowEl.textContent = activeVideo
-        ? '▶ Up Next: ' + activeVideo.title
-        : '▶ Queue empty — add a video below!';
+      nowEl.innerHTML = '';
+      var nowSpan = document.createElement('span');
+      if (activeVideo) {
+        nowSpan.textContent = '▶ Up Next' + (activeVideo.category ? ' [' + activeVideo.category + ']' : '') + ': ' + activeVideo.title + (activeVideo.channel ? ' · ' + activeVideo.channel : '');
+      } else {
+        nowSpan.textContent = '▶ Queue empty — add a video below!';
+      }
+      nowEl.appendChild(nowSpan);
+
+      if (activeVideo && isSafeHttpUrl(activeVideo.url)) {
+        var nowLink = document.createElement('a');
+        nowLink.className = 'mini-btn watch-link-btn';
+        nowLink.href = activeVideo.url;
+        nowLink.target = '_blank';
+        nowLink.rel = 'noopener noreferrer';
+        nowLink.textContent = '↗ Watch Now';
+        nowEl.appendChild(nowLink);
+      }
     }
 
     if (!listEl) return;
     listEl.innerHTML = '';
 
-    state.youtube.items.forEach(function (video) {
+    if (!visibleItems.length) {
+      var emptyLi = document.createElement('li');
+      emptyLi.className = 'youtube-queue-item';
+      emptyLi.textContent = 'No videos in this category yet — queue one below or switch to All!';
+      listEl.appendChild(emptyLi);
+      return;
+    }
+
+    visibleItems.forEach(function (video) {
       var isCurrent = activeVideo && video.id === activeVideo.id;
       var li = document.createElement('li');
       li.className = 'youtube-queue-item' + (video.done ? ' is-done' : '') + (isCurrent ? ' is-current' : '');
+
+      var mainCol = document.createElement('div');
+      mainCol.className = 'queue-item-main';
 
       var toggleBtn = document.createElement('button');
       toggleBtn.type = 'button';
@@ -1123,11 +1432,37 @@
         saveState(state);
         renderYoutubeSection(state);
       });
+      mainCol.appendChild(toggleBtn);
+
+      var metaRow = document.createElement('div');
+      metaRow.className = 'queue-item-meta';
+
+      var catBadge = document.createElement('span');
+      catBadge.className = getYoutubeCatBadgeClass(video.category);
+      catBadge.textContent = video.category || 'Custom';
+      metaRow.appendChild(catBadge);
+
+      if (video.channel || video.vibe) {
+        var subNote = document.createElement('span');
+        subNote.className = 'item-subnote';
+        subNote.textContent = (video.channel || '') + (video.channel && video.vibe ? ' · ' : '') + (video.vibe || '');
+        metaRow.appendChild(subNote);
+      }
+
+      mainCol.appendChild(metaRow);
 
       var actions = document.createElement('span');
-      actions.style.display = 'inline-flex';
-      actions.style.gap = '0.35rem';
-      actions.style.flexShrink = '0';
+      actions.className = 'queue-item-actions';
+
+      if (isSafeHttpUrl(video.url)) {
+        var watchLink = document.createElement('a');
+        watchLink.className = 'mini-btn watch-link-btn';
+        watchLink.href = video.url;
+        watchLink.target = '_blank';
+        watchLink.rel = 'noopener noreferrer';
+        watchLink.textContent = '↗ Watch';
+        actions.appendChild(watchLink);
+      }
 
       var playBtn = document.createElement('button');
       playBtn.type = 'button';
@@ -1146,13 +1481,15 @@
       rmBtn.textContent = '✕';
       rmBtn.addEventListener('click', function () {
         state.youtube.items = state.youtube.items.filter(function (v) { return v.id !== video.id; });
+        if (!Array.isArray(state.youtube.dismissedIds)) state.youtube.dismissedIds = [];
+        if (state.youtube.dismissedIds.indexOf(video.id) === -1) state.youtube.dismissedIds.push(video.id);
         saveState(state);
         renderYoutubeSection(state);
       });
 
       actions.appendChild(playBtn);
       actions.appendChild(rmBtn);
-      li.appendChild(toggleBtn);
+      li.appendChild(mainCol);
       li.appendChild(actions);
       listEl.appendChild(li);
     });
@@ -1161,17 +1498,33 @@
   function bindYoutubeSection(state) {
     renderYoutubeSection(state);
 
+    document.querySelectorAll('[data-yt-filter]').forEach(function (btn) {
+      if (btn.dataset.bound) return;
+      btn.dataset.bound = '1';
+      btn.addEventListener('click', function () {
+        state.youtube.filter = btn.getAttribute('data-yt-filter') || 'All';
+        saveState(state);
+        renderYoutubeSection(state);
+      });
+    });
+
     var form = document.getElementById('youtube-add-form');
     var input = document.getElementById('youtube-video-input');
     if (form && input && !form.dataset.bound) {
       form.dataset.bound = '1';
       form.addEventListener('submit', function (e) {
         e.preventDefault();
-        var val = input.value.trim();
-        if (!val) return;
+        var rawVal = input.value.trim();
+        if (!rawVal) return;
+        var parsed = parseTitleAndUrl(rawVal, 'YouTube Pick');
+        var activeFilter = state.youtube.filter || 'All';
         var newItem = {
           id: 'yt-' + Date.now(),
-          title: val,
+          title: parsed.title,
+          channel: parsed.url ? 'Custom Link' : '',
+          category: activeFilter !== 'All' ? activeFilter : 'Custom',
+          url: parsed.url,
+          vibe: '',
           done: false
         };
         state.youtube.items.push(newItem);
@@ -1186,10 +1539,16 @@
     if (randomBtn && !randomBtn.dataset.bound) {
       randomBtn.dataset.bound = '1';
       randomBtn.addEventListener('click', function () {
-        var unwatched = state.youtube.items.filter(function (v) { return !v.done; });
-        var pool = unwatched.length ? unwatched : state.youtube.items;
+        var visible = getFilteredYoutubeItems(state);
+        var sourceList = visible.length ? visible : state.youtube.items;
+        var unwatched = sourceList.filter(function (v) { return !v.done; });
+        var pool = unwatched.length ? unwatched : sourceList;
         if (!pool.length) return;
         var pick = pool[Math.floor(Math.random() * pool.length)];
+        if (pool.length > 1 && pick.id === state.youtube.nowPlayingId) {
+          var altPool = pool.filter(function (v) { return v.id !== state.youtube.nowPlayingId; });
+          pick = altPool[Math.floor(Math.random() * altPool.length)];
+        }
         state.youtube.nowPlayingId = pick.id;
         saveState(state);
         renderYoutubeSection(state);
@@ -1643,7 +2002,7 @@
   }
 
   /* ---------- Footer Buttons ---------- */
-  function bindFooter(menu, state) {
+  function bindFooter(menu, state, recs) {
     var cluckBtn = document.getElementById('cluck-confetti-btn');
     var punEl = document.getElementById('footer-pun-text');
     var punIndex = 0;
@@ -1667,7 +2026,7 @@
         } catch (err) {
           // ignore
         }
-        var fresh = createInitialState(menu);
+        var fresh = createInitialState(menu, recs);
         Object.keys(fresh).forEach(function (k) {
           state[k] = fresh[k];
         });
@@ -1685,7 +2044,8 @@
   /* ---------- Boot ---------- */
   function init() {
     var menu = getMenuData();
-    var state = loadState(menu);
+    var recs = getRecommendationsData();
+    var state = loadState(menu, recs);
 
     warmChickenAudioCache();
     mountAllStaticChickens();
@@ -1695,7 +2055,7 @@
     bindWandaSection(state);
     bindSubnauticaSection(state);
     renderTimeline(state);
-    bindFooter(menu, state);
+    bindFooter(menu, state, recs);
   }
 
   if (document.readyState === 'loading') {

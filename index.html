@@ -202,13 +202,19 @@
         </div>
 
         <div>
-          <h3 style="margin-top: 0.35rem;">Maddie's Horror Watchlist</h3>
+          <h3 style="margin-top: 0.35rem;">Maddie's Horror &amp; Co-Op Watchlist</h3>
+          <div id="games-filter-row" class="filter-chip-row" role="group" aria-label="Filter games watchlist">
+            <button type="button" class="filter-chip is-selected" data-games-filter="All" aria-pressed="true">All</button>
+            <button type="button" class="filter-chip" data-games-filter="Horror" aria-pressed="false">Horror</button>
+            <button type="button" class="filter-chip" data-games-filter="Co-Op < $5" aria-pressed="false">Co-Op &lt; $5</button>
+            <button type="button" class="filter-chip" data-games-filter="Other Pick" aria-pressed="false">Other Picks</button>
+          </div>
           <ul id="fnaf-watchlist" class="watchlist-items" style="margin-bottom: 0.65rem;">
             <!-- Populated by js/app.js -->
           </ul>
           <form id="fnaf-add-form" class="youtube-input-row">
-            <label for="fnaf-game-input" class="sr-only">Add horror game</label>
-            <input id="fnaf-game-input" type="text" class="cartoon-input" maxlength="80" placeholder="Add horror game (e.g. Phasmophobia)...">
+            <label for="fnaf-game-input" class="sr-only">Add horror or co-op game</label>
+            <input id="fnaf-game-input" type="text" class="cartoon-input" maxlength="100" placeholder="Add game title or Steam link...">
             <button type="submit" class="cartoon-btn cartoon-btn--gold">+ Add</button>
           </form>
         </div>
@@ -226,11 +232,20 @@
           </div>
 
           <p class="speech-bubble">
-            Post-horror comedy cooldown! Load up funny clips, food tier lists, and internet rabbit holes while eating fries.
+            Spontaneous rabbit-hole picks across Travel, Food, Business, Games &amp; Tech — pick a category or spin a random link while munching fries!
           </p>
 
-          <div id="youtube-now-playing" class="now-playing-pill" aria-live="polite" style="margin-top: 0.9rem;">
-            ▶ Up Next: Pick or spin a video below!
+          <div id="youtube-filter-row" class="filter-chip-row" role="group" aria-label="Filter YouTube categories">
+            <button type="button" class="filter-chip is-selected" data-yt-filter="All" aria-pressed="true">All</button>
+            <button type="button" class="filter-chip" data-yt-filter="Travel" aria-pressed="false">Travel</button>
+            <button type="button" class="filter-chip" data-yt-filter="Food" aria-pressed="false">Food</button>
+            <button type="button" class="filter-chip" data-yt-filter="Business" aria-pressed="false">Business</button>
+            <button type="button" class="filter-chip" data-yt-filter="Games" aria-pressed="false">Games</button>
+            <button type="button" class="filter-chip" data-yt-filter="Tech" aria-pressed="false">Tech</button>
+          </div>
+
+          <div id="youtube-now-playing" class="now-playing-pill" aria-live="polite" style="margin-top: 0.45rem;">
+            <span>▶ Up Next: Pick or spin a video below!</span>
           </div>
 
           <ul id="youtube-list" class="youtube-queue-list" style="margin-top: 0.75rem;">
@@ -241,15 +256,15 @@
         <div>
           <form id="youtube-add-form" class="youtube-input-row" style="margin-bottom: 0.7rem;">
             <label for="youtube-video-input" class="sr-only">Add YouTube video title or URL</label>
-            <input id="youtube-video-input" type="text" class="cartoon-input" maxlength="100" placeholder="Add video title or YouTube link...">
+            <input id="youtube-video-input" type="text" class="cartoon-input" maxlength="120" placeholder="Add video title or paste https:// link...">
             <button type="submit" class="cartoon-btn cartoon-btn--danger">+ Queue</button>
           </form>
 
           <div class="sandwich-meta-row">
             <button type="button" id="youtube-random-btn" class="cartoon-btn cartoon-btn--gold">
-              🎲 Random Pick
+              🎲 Spontaneous Pick
             </button>
-            <span id="youtube-progress-note" class="spice-pill">0 / 4 watched</span>
+            <span id="youtube-progress-note" class="spice-pill">0 / 15 watched</span>
           </div>
         </div>
       </article>
@@ -400,6 +415,7 @@
   <!-- Plain scripts loaded in strict order so file:// works with zero CORS errors -->
   <script src="js/sandwiches-data.js"></script>
   <script src="js/chickens.js"></script>
-  <script src="js/app.js"></script>
+  <script defer src="js/recommendations-data.js"></script>
+  <script defer src="js/app.js"></script>
 </body>
 </html>
