@@ -211,7 +211,33 @@
     }
   }
 
-  /* ---------- Audio Helpers (Web Audio API, zero external assets) ---------- */
+  /* ---------- Real Online Chicken MP3 Sound Effects + Emergency Synth Fallback ---------- */
+  var CHICKEN_SOUND_URLS = {
+    cluck: 'https://assets.mixkit.co/active_storage/sfx/1772/1772-preview.mp3',
+    cluckAlt: 'https://orangefreesounds.com/wp-content/uploads/2023/08/Chicken-cluck-sound-effect.mp3',
+    squawk: 'https://bigsoundbank.com/UPLOAD/mp3/0453.mp3',
+    roosterAlarm: 'https://assets.mixkit.co/active_storage/sfx/2462/2462-preview.mp3'
+  };
+
+  var preloadedAudioCache = {};
+  var activeAudioClips = [];
+  var cluckToggleIndex = 0;
+
+  function warmChickenAudioCache() {
+    if (typeof window.Audio !== 'function') return;
+    Object.keys(CHICKEN_SOUND_URLS).forEach(function (key) {
+      var url = CHICKEN_SOUND_URLS[key];
+      try {
+        var pre = new window.Audio(url);
+        pre.preload = 'auto';
+        pre.load();
+        preloadedAudioCache[key] = pre;
+      } catch (err) {
+        // Ignore preload errors
+      }
+    });
+  }
+
   function getAudioContext() {
     try {
       var AudioCtx = window.AudioContext || window.webkitAudioContext;
@@ -243,7 +269,7 @@
     osc.stop(now + duration + 0.02);
   }
 
-  function playCartoonAlarmChime() {
+  function synthAlarmEmergency() {
     var ctx = getAudioContext();
     if (!ctx) return;
     try {
@@ -258,7 +284,7 @@
     }
   }
 
-  function playCluckSound() {
+  function synthCluckEmergency() {
     var ctx = getAudioContext();
     if (!ctx) return;
     try {
@@ -287,7 +313,7 @@
     }
   }
 
-  function playJumpscareBoing() {
+  function synthJumpscareEmergency() {
     var ctx = getAudioContext();
     if (!ctx) return;
     try {
@@ -297,6 +323,96 @@
       // Safe no-op
     }
   }
+
+  function releaseClip(clip) {
+    var idx = activeAudioClips.indexOf(clip);
+    if (idx !== -1) activeAudioClips.splice(idx, 1);
+  }
+
+  function playOnlineMp3(url, volume, onFailure) {
+    try {
+      if (typeof window.Audio !== 'function' || !url) {
+        if (typeof onFailure === 'function') onFailure();
+        return null;
+      }
+
+      var clip = new window.Audio(url);
+      clip.volume = typeof volume === 'number' ? volume : 0.8;
+      clip.preload = 'auto';
+      activeAudioClips.push(clip);
+
+      var failed = false;
+      var handleFailure = function () {
+        if (failed) return;
+        failed = true;
+        releaseClip(clip);
+        if (typeof onFailure === 'function') onFailure();
+      };
+
+      clip.addEventListener('ended', function () {
+        releaseClip(clip);
+      }, { once: true });
+
+      clip.addEventListener('error', handleFailure, { once: true });
+
+      var playPromise = clip.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(function (err) {
+          if (!err || (err.name !== 'AbortError' && err.name !== 'NotAllowedError')) {
+            handleFailure();
+          }
+        });
+      }
+      return clip;
+    } catch (err) {
+      if (typeof onFailure === 'function') onFailure();
+      return null;
+    }
+  }
+
+  function playAudioWithBackup(primaryUrl, backupUrl, volume, emergencySynthFn) {
+    return playOnlineMp3(primaryUrl, volume, function () {
+      if (backupUrl && backupUrl !== primaryUrl) {
+        playOnlineMp3(backupUrl, volume, emergencySynthFn);
+      } else if (typeof emergencySynthFn === 'function') {
+        emergencySynthFn();
+      }
+    });
+  }
+
+  function playCartoonAlarmChime() {
+    return playAudioWithBackup(
+      CHICKEN_SOUND_URLS.roosterAlarm,
+      CHICKEN_SOUND_URLS.cluck,
+      0.85,
+      synthAlarmEmergency
+    );
+  }
+
+  function playCluckSound() {
+    var primary = cluckToggleIndex % 2 === 0 ? CHICKEN_SOUND_URLS.cluck : CHICKEN_SOUND_URLS.cluckAlt;
+    var backup = cluckToggleIndex % 2 === 0 ? CHICKEN_SOUND_URLS.cluckAlt : CHICKEN_SOUND_URLS.cluck;
+    cluckToggleIndex += 1;
+    return playAudioWithBackup(primary, backup, 0.8, synthCluckEmergency);
+  }
+
+  function playJumpscareBoing() {
+    return playAudioWithBackup(
+      CHICKEN_SOUND_URLS.squawk,
+      CHICKEN_SOUND_URLS.cluckAlt,
+      0.82,
+      synthJumpscareEmergency
+    );
+  }
+
+  window.HARVEYS_SOUND_FX = {
+    urls: CHICKEN_SOUND_URLS,
+    preloaded: preloadedAudioCache,
+    activeClips: activeAudioClips,
+    playCluckSound: playCluckSound,
+    playJumpscareBoing: playJumpscareBoing,
+    playCartoonAlarmChime: playCartoonAlarmChime
+  };
 
   /* ---------- Confetti Burst ---------- */
   function launchConfetti(anchorEl) {
@@ -1432,7 +1548,7 @@
         playCartoonAlarmChime();
         triggerAlarmRingVisual();
         if (feedbackEl) {
-          feedbackEl.textContent = 'RING-RING-PING!! Subnautica dive alarm chime loud & clear!';
+          feedbackEl.textContent = 'COCK-A-DOODLE-DOO!! Subnautica rooster alarm clucking loud & clear!';
         }
       });
     }
@@ -1571,6 +1687,7 @@
     var menu = getMenuData();
     var state = loadState(menu);
 
+    warmChickenAudioCache();
     mountAllStaticChickens();
     bindMealSection(menu, state);
     bindFnafSection(state);
